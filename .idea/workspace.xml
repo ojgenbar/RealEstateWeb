@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="13877622-10e3-453f-8d87-abdc0ae65fef" name="Default" comment="Edited">
+    <list default="true" id="13877622-10e3-453f-8d87-abdc0ae65fef" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0300/RealEstate_20170526_0300.dbf" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0300/RealEstate_20170526_0300.prj" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0300/RealEstate_20170526_0300.shp" afterPath="" />
@@ -116,8 +116,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="212" column="13" lean-forward="true" selection-start-line="212" selection-start-column="13" selection-end-line="212" selection-end-column="13" />
+            <state relative-caret-position="333">
+              <caret line="217" column="3" lean-forward="true" selection-start-line="217" selection-start-column="3" selection-end-line="217" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -638,7 +638,14 @@
       <option name="project" value="LOCAL" />
       <updated>1496010678517</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Edited1">
+      <created>1496011010157</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1496011010157</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -735,7 +742,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1" />
     <MESSAGE value="Edited" />
-    <option name="LAST_COMMIT_MESSAGE" value="Edited" />
+    <MESSAGE value="Edited1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edited1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1028,8 +1036,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="212" column="13" lean-forward="true" selection-start-line="212" selection-start-column="13" selection-end-line="212" selection-end-column="13" />
+        <state relative-caret-position="333">
+          <caret line="217" column="3" lean-forward="true" selection-start-line="217" selection-start-column="3" selection-end-line="217" selection-end-column="3" />
           <folding />
         </state>
       </provider>
