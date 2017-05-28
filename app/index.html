@@ -1,0 +1,648 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Недвижимость Петербурга</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="static/apple-touch-icon.png">
+    <link rel="icon" type="image/ico" href="favicon.ico"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+
+    <link rel="stylesheet" href="static/css/normalize.css">
+    <link rel="stylesheet" href="static/css/main.css">
+    <script src="static/js/vendor/modernizr-2.8.3.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="stylesheet" type="text/css" href="static/js/dhtmlxSuite_v50_std/codebase/fonts/font_roboto/roboto.css"/>
+    <link rel="stylesheet" type="text/css" href="static/js/dhtmlxSuite_v50_std/codebase/dhtmlx.css"/>
+    <script src="static/js/dhtmlxSuite_v50_std/codebase/dhtmlx.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.0.js"></script>
+    <link rel="stylesheet" href="static/js/leaflet/leaflet.css"/>
+    <script src="static/js/leaflet/leaflet.js"></script>
+
+
+    <script src="static/js/Leaflet.draw/src/Leaflet.draw.js"></script>
+    <script src="static/js/Leaflet.draw/src/Leaflet.Draw.Event.js"></script>
+    <link rel="stylesheet" href="static/js/Leaflet.draw/src/leaflet.draw.css"/>
+
+    <script src="static/js/Leaflet.draw/src/Toolbar.js"></script>
+    <script src="static/js/Leaflet.draw/src/Tooltip.js"></script>
+
+    <script src="static/js/Leaflet.draw/src/ext/GeometryUtil.js"></script>
+    <script src="static/js/Leaflet.draw/src/ext/LatLngUtil.js"></script>
+    <script src="static/js/Leaflet.draw/src/ext/LineUtil.Intersect.js"></script>
+    <script src="static/js/Leaflet.draw/src/ext/Polygon.Intersect.js"></script>
+    <script src="static/js/Leaflet.draw/src/ext/Polyline.Intersect.js"></script>
+    <script src="static/js/Leaflet.draw/src/ext/TouchEvents.js"></script>
+
+    <script src="static/js/Leaflet.draw/src/draw/DrawToolbar.js"></script>
+    <script src="static/js/Leaflet.draw/src/draw/handler/Draw.Feature.js"></script>
+    <script src="static/js/Leaflet.draw/src/draw/handler/Draw.SimpleShape.js"></script>
+    <script src="static/js/Leaflet.draw/src/draw/handler/Draw.Polyline.js"></script>
+    <script src="static/js/Leaflet.draw/src/draw/handler/Draw.Circle.js"></script>
+    <script src="static/js/Leaflet.draw/src/draw/handler/Draw.Marker.js"></script>
+    <script src="static/js/Leaflet.draw/src/draw/handler/Draw.Polygon.js"></script>
+    <script src="static/js/Leaflet.draw/src/draw/handler/Draw.Rectangle.js"></script>
+
+
+    <script src="static/js/Leaflet.draw/src/edit/EditToolbar.js"></script>
+    <script src="static/js/Leaflet.draw/src/edit/handler/EditToolbar.Edit.js"></script>
+    <script src="static/js/Leaflet.draw/src/edit/handler/EditToolbar.Delete.js"></script>
+
+    <script src="static/js/Leaflet.draw/src/Control.Draw.js"></script>
+
+    <script src="static/js/Leaflet.draw/src/edit/handler/Edit.Poly.js"></script>
+    <script src="static/js/Leaflet.draw/src/edit/handler/Edit.SimpleShape.js"></script>
+    <script src="static/js/Leaflet.draw/src/edit/handler/Edit.Circle.js"></script>
+    <script src="static/js/Leaflet.draw/src/edit/handler/Edit.Rectangle.js"></script>
+    <script src="static/js/Leaflet.draw/src/edit/handler/Edit.Marker.js"></script>
+
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            overflow: hidden;
+        }
+    </style>
+
+    <style>
+        h1 {
+            color: white;
+            text-align: center;
+            font-family: 'Open Sans Condensed', sans-serif;
+            font-style: normal;
+            font-weight: 100;
+            letter-spacing: 15px;
+        }
+    </style>
+
+    <style>
+        div#mainlayout {
+            position: relative;
+            /*margin-top: 10px;*/
+            /*margin-left: 10px;*/
+            width: 100%;
+            height: 90%;
+        }
+    </style>
+
+    <script>
+        var mainLayout, map, myAcc, formData, parametersForm, downloadForm;
+        function doOnLoad() {
+            var windowWidth, windowHeight, aw, ah;
+            mainLayout = new dhtmlXLayoutObject({
+                parent: 'mainlayout',
+//                parent: document.body,
+                pattern: "3U",
+                cells: [{id: "a", text: "Карта"},
+                    {id: "b", text: "Меню", width: 420},
+                    {id: "c", text: "Информация"}
+                ]
+            });
+            windowWidth = $(document).find('#mainlayout').width();
+            windowHeight = $(document).find('#mainlayout').height();
+            aw = windowWidth * 0.5;
+            ah = windowHeight * 0.8;
+//            mainLayout.cells('a').setWidth(aw);
+            mainLayout.cells('a').setHeight(ah);
+
+            mainLayout.cells('a').attachObject('mapid');
+//            mainLayout.cells('b').attachObject('accObj');
+
+            mainLayout.cells('b').collapse();
+            mainLayout.cells('c').collapse();
+
+            map = L.map('mapid').setView([59.942959, 30.35], 10);
+//            map = L.map('mapid').setView([40.712216, -74.22655], 10);
+//            L.Icon.Default.imagePath = 'static/img';
+//            alert(L.Icon.Default.prototype.options[iconUrl]);
+            L.Icon.Default.prototype.options = {
+                iconUrl: '/static/img/SupplyIcon.png',
+                iconSize: [10, 10],
+                iconAnchor: [5, 5]
+            };
+
+            var imageUrl = 'static/raster/AVERAGE-3857-colored-2.png',
+//                imageBounds = [[29.4295413702639657,59.6339240289425589],[30.7588085944611471,60.2449766598578051]];
+//                imageBounds = [[59.633924028, 29.429541370], [60.2449766598, 30.758808594]];
+                imageBounds = [[59.6339240289707959, 29.4295413701381676], [60.2449766597451273, 30.7587528125922631]];
+            var im = L.imageOverlay(imageUrl, imageBounds, {opacity: 0.65}).addTo(map);
+
+            var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                osmAttrib = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors' +
+                    '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ',
+                osm = L.tileLayer(osmUrl, {maxZoom: 18, attribution: osmAttrib}),
+                mapbox = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                    maxZoom: 18,
+                    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                    '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                    'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                    id: 'mapbox.streets'
+                });
+            drawnItems = L.featureGroup().addTo(map);
+            L.control.layers({
+                    'OSM': osm,
+                    'Mapbasic': mapbox.addTo(map),
+                    "Google": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
+                        attribution: 'google'
+                    })
+                },
+                {
+                    'Области': drawnItems,
+                    'Цена': im
+                },
+                {position: 'topleft', collapsed: false}).addTo(map);
+            map.addControl(new L.Control.Draw({
+                edit: {
+                    featureGroup: drawnItems,
+                    poly: {
+                        allowIntersection: false
+                    }
+                },
+                draw: {
+                    marker: false,
+                    polyline: false,
+                    circle: false,
+                    polygon: {
+                        allowIntersection: false,
+                        showArea: true
+                    }
+                }
+            }));
+
+//            map.addControl(new L.EditToolbar.Edit());
+
+            map.on(L.Draw.Event.CREATED, function (event) {
+                var layer = event.layer;
+                drawnItems.addLayer(layer);
+            });
+
+            myAcc = mainLayout.cells('b').attachAccordion();
+//            myAcc.addItem("a1", "Навигация по сайту");
+            myAcc.addItem("a2", "Параметры поиска", true);
+            myAcc.addItem("a3", "Экспорт выбранных объявлений");
+
+            mainLayout.cells('b').expand();
+
+            formData = [
+                {type: "settings", position: "label-left", labelWidth: 90, inputWidth: 130},
+                {
+                    type: "block", width: "auto", blockOffset: "", offsetLeft: "10", offsetTop: "10", list: [
+                    {
+                        type: "block", width: "auto", blockOffset: "0", list: [
+                        {type: "label", label: "Комнат", value: "", labelWidth: "160"},
+                        {type: "newcolumn", offset: "15"},
+                        {
+                            type: "input",
+                            label: "от",
+                            labelWidth: "20",
+                            name: "qrooms1",
+                            value: "1",
+                            inputWidth: "50",
+                            labelAlign: "right",
+                            validate: "isValidInteger",
+                            userdataName: "qrooms1"
+                        },
+                        {type: "newcolumn"},
+                        {
+                            type: "input",
+                            label: "до",
+                            offsetLeft: "30",
+                            name: "qrooms2",
+                            labelAlign: "right",
+                            labelWidth: "20",
+                            inputWidth: "50",
+                            validate: "isValidInteger",
+                            value: "2"
+                        }
+                    ]
+                    },
+                    {
+                        type: "block", width: "auto", blockOffset: "0", list: [
+                        {type: "label", label: "Цена, тыс. руб.", value: "", labelWidth: "160"},
+                        {type: "newcolumn", offset: "15"},
+                        {
+                            type: "input",
+                            name: "price1",
+                            label: "от",
+                            labelWidth: "20",
+                            inputWidth: "50",
+                            labelAlign: "right",
+                            validate: "isValidNumeric",
+                            value: "3500"
+                        },
+                        {type: "newcolumn"},
+                        {
+                            type: "input",
+                            name: "price2",
+                            label: "до",
+                            offsetLeft: "30",
+                            labelAlign: "right",
+                            labelWidth: "20",
+                            inputWidth: "50",
+                            validate: "isValidNumeric",
+                            value: "3501"
+                        }
+                    ]
+                    },
+                    {
+                        type: "block", width: "auto", blockOffset: "0", list: [
+                        {type: "label", label: "Цена за кв. м., тыс. руб.", value: "", labelWidth: "160"},
+                        {type: "newcolumn", offset: "15"},
+                        {
+                            type: "input",
+                            name: "pricesqm1",
+                            label: "от",
+                            labelWidth: "20",
+                            inputWidth: "50",
+                            labelAlign: "right",
+                            validate: "isValidNumeric",
+                            value: "50"
+                        },
+                        {type: "newcolumn"},
+                        {
+                            type: "input",
+                            name: "pricesqm2",
+                            label: "до",
+                            offsetLeft: "30",
+                            labelAlign: "right",
+                            labelWidth: "20",
+                            inputWidth: "50",
+                            validate: "isValidNumeric",
+                            value: "150"
+                        }
+                    ]
+                    },
+                    {
+                        type: "fieldset", width: "auto", label: "Площадь", blockOffset: 20, offsetTop: 45, list: [
+                        {
+                            type: "block", width: "auto", blockOffset: "0", list: [
+                            {type: "label", label: "Общая", value: "", labelWidth: "135"},
+                            {type: "newcolumn", offset: "15"},
+                            {
+                                type: "input",
+                                name: "area1",
+                                label: "от",
+                                labelWidth: "20",
+                                inputWidth: "50",
+                                labelAlign: "right",
+                                validate: "isValidNumeric",
+                                value: "50"
+                            },
+                            {type: "newcolumn"},
+                            {
+                                type: "input",
+                                name: "area2",
+                                label: "до",
+                                offsetLeft: "30",
+                                labelAlign: "right",
+                                labelWidth: "20",
+                                inputWidth: "50",
+                                validate: "isValidNumeric",
+                                value: "200"
+                            }
+                        ]
+                        },
+                        {
+                            type: "block", width: "auto", blockOffset: "0", list: [
+                            {type: "label", label: "Жилая", value: "", labelWidth: "135"},
+                            {type: "newcolumn", offset: "15"},
+                            {
+                                type: "input",
+                                name: "livingarea1",
+                                label: "от",
+                                labelWidth: "20",
+                                inputWidth: "50",
+                                labelAlign: "right",
+                                validate: "isValidNumeric",
+                                value: "52"
+                            },
+                            {type: "newcolumn"},
+                            {
+                                type: "input",
+                                name: "livingarea2",
+                                label: "до",
+                                offsetLeft: "30",
+                                labelAlign: "right",
+                                labelWidth: "20",
+                                inputWidth: "50",
+                                validate: "isValidNumeric",
+                                value: "195"
+                            }
+                        ]
+                        },
+                        {
+                            type: "block", width: "auto", blockOffset: "0", list: [
+                            {type: "label", label: "Кухни", value: "", labelWidth: "135"},
+                            {type: "newcolumn", offset: "15"},
+                            {
+                                type: "input",
+                                name: "kitchenarea1",
+                                label: "от",
+                                labelWidth: "20",
+                                inputWidth: "50",
+                                labelAlign: "right",
+                                validate: "isValidNumeric",
+                                value: "56"
+                            },
+                            {type: "newcolumn"},
+                            {
+                                type: "input",
+                                name: "kitchenarea2",
+                                label: "до",
+                                offsetLeft: "30",
+                                labelAlign: "right",
+                                labelWidth: "20",
+                                inputWidth: "50",
+                                validate: "isValidNumeric",
+                                value: "190"
+                            }
+                        ]
+                        }
+                    ]
+                    },{
+                        type: "fieldset", width: "auto", label: "Расстояние", blockOffset: 20, offsetTop: "15", list: [
+                        {
+                            type: "block", width: "auto", blockOffset: "0", list: [
+                            {type: "label", label: "До метро", value: "", labelWidth: "135"},
+                            {type: "newcolumn", offset: "15"},
+                            {
+                                type: "input",
+                                name: "subway1",
+                                label: "от",
+                                labelWidth: "20",
+                                inputWidth: "50",
+                                labelAlign: "right",
+                                validate: "isValidNumeric",
+                                value: "50"
+                            },
+                            {type: "newcolumn"},
+                            {
+                                type: "input",
+                                name: "subway2",
+                                label: "до",
+                                offsetLeft: "30",
+                                labelAlign: "right",
+                                labelWidth: "20",
+                                inputWidth: "50",
+                                validate: "isValidNumeric",
+                                value: "200"
+                            }
+                        ]
+                        },
+                        {
+                            type: "block", width: "auto", blockOffset: "0", list: [
+                            {type: "label", label: "До парка", value: "", labelWidth: "135"},
+                            {type: "newcolumn", offset: "15"},
+                            {
+                                type: "input",
+                                name: "park1",
+                                label: "от",
+                                labelWidth: "20",
+                                inputWidth: "50",
+                                labelAlign: "right",
+                                validate: "isValidNumeric",
+                                value: "52"
+                            },
+                            {type: "newcolumn"},
+                            {
+                                type: "input",
+                                name: "park2",
+                                label: "до",
+                                offsetLeft: "30",
+                                labelAlign: "right",
+                                labelWidth: "20",
+                                inputWidth: "50",
+                                validate: "isValidNumeric",
+                                value: "195"
+                            }
+                        ]
+                        },
+                        {
+                            type: "block", width: "auto", blockOffset: "0", list: [
+                            {type: "label", label: "До КАД (с ЗСД)", value: "", labelWidth: "135"},
+                            {type: "newcolumn", offset: "15"},
+                            {
+                                type: "input",
+                                name: "road1",
+                                label: "от",
+                                labelWidth: "20",
+                                inputWidth: "50",
+                                labelAlign: "right",
+                                validate: "isValidNumeric",
+                                value: "56"
+                            },
+                            {type: "newcolumn"},
+                            {
+                                type: "input",
+                                name: "road2",
+                                label: "до",
+                                offsetLeft: "30",
+                                labelAlign: "right",
+                                labelWidth: "20",
+                                inputWidth: "50",
+                                validate: "isValidNumeric",
+                                value: "190"
+                            }
+                        ]
+                        }
+                    ]
+                    },
+                    {
+                        type: "fieldset", width: "auto", label: "Даты", blockOffset: 20, offsetTop: "15", list: [
+                        {type: "calendar", name: "date1", label: "с", labelWidth: "20", value: "2017-04-01"},
+                        {type: "newcolumn"},
+                        {
+                            type: "calendar",
+                            name: "date2",
+                            label: "по",
+                            labelWidth: "30",
+                            offsetLeft: "15",
+                            value: "2017-04-01"
+                        }
+                    ]
+                    }
+                ]
+                },
+
+                {
+                    type: "button",
+                    name: "buttonApply",
+                    label: "New Input",
+                    value: "Применить",
+                    offsetLeft: "10",
+                    offsetTop: "15"
+                }
+            ];
+            parametersForm = myAcc.cells('a2').attachForm();
+            parametersForm.loadStruct(formData);
+
+            formData = [
+                {type: "settings", position: "label-left", labelWidth: 90, inputWidth: 130},
+                {
+                    type: "fieldset", width: "auto", blockOffset: 20, label: "Формат", offsetLeft: "15", list: [
+                    {type: "radio", label: "ESRI Shapefile", value: "ESRI Shapefile", name: "format", checked: true},
+                    {type: "radio", label: "GeoJSON", value: "GeoJSON", name: "format"}
+                ]
+                },
+                {
+                    type: "button", label: "Download", value: "Загрузить",
+                    offsetLeft: "15",
+                    offsetTop: "15"
+                }
+            ];
+            downloadForm = myAcc.cells('a3').attachForm();
+            downloadForm.loadStruct(formData);
+
+            parametersForm.attachEvent("onButtonClick", doOnButtonApply);
+            downloadForm.attachEvent("onButtonClick", doOnButtonDownload);
+        }
+    </script>
+
+    <script>
+        var parametersDict;
+        function getQueryParameters() {
+            var qrooms1, qrooms2, price1, price2, pricesqm1, pricesqm2, area1, area2, livingarea1, livingarea2,
+                kitchenarea1, kitchenarea2, date1, date2, exportFormat;
+            qrooms1 = parametersForm.getItemValue("qrooms1");
+            qrooms2 = parametersForm.getItemValue("qrooms2");
+            price1 = parametersForm.getItemValue("price1");
+            price2 = parametersForm.getItemValue("price2");
+            pricesqm1 = parametersForm.getItemValue("pricesqm1");
+            pricesqm2 = parametersForm.getItemValue("pricesqm2");
+            area1 = parametersForm.getItemValue("area1");
+            area2 = parametersForm.getItemValue("area2");
+            livingarea1 = parametersForm.getItemValue("livingarea1");
+            livingarea2 = parametersForm.getItemValue("livingarea2");
+            kitchenarea1 = parametersForm.getItemValue("kitchenarea1");
+            kitchenarea2 = parametersForm.getItemValue("kitchenarea2");
+            date1 = convertDateToStr(parametersForm.getItemValue("date1"));
+            date2 = convertDateToStr(parametersForm.getItemValue("date2"));
+
+            exportFormat = downloadForm.getItemValue("format");
+
+            var dataGeo = drawnItems.toGeoJSON();
+            var dataJSON = JSON.stringify(dataGeo);
+
+            parametersDict = {
+                qrooms1: qrooms1,
+                qrooms2: qrooms2,
+                price1: price1,
+                price2: price2,
+                price_sqm1: pricesqm1,
+                price_sqm2: pricesqm2,
+                area1: area1,
+                area2: area2,
+                living_area1: livingarea1,
+                living_area2: livingarea2,
+                kitchen_area1: kitchenarea1,
+                kitchen_area2: kitchenarea2,
+                date1: date1,
+                date2: date2,
+                bound: dataJSON,
+                exportFormat: exportFormat
+            };
+            return parametersDict
+        }
+
+    </script>
+
+    <script>
+        function doOnButtonApply() {
+
+            var dict = getQueryParameters();
+
+            var baseurl = 'http://127.0.0.1:5000/query?';
+            var strparams = jQuery.param(dict);
+            var request = baseurl + strparams;
+            console.log(request);
+
+//            drawnItems.getLayers().forEach(function (entry) {
+//               alert(typeof entry);
+//               alert(typeof entry.toGeoJSON())
+//            });
+            $.ajax({
+                url: request,
+                success: function (data) {
+                    loadDataToMap(data);
+                }
+            });
+
+        }
+
+
+        function doOnButtonDownload() {
+            var dict = getQueryParameters();
+
+            var baseurl = 'http://127.0.0.1:5000/download?';
+            var strparams = jQuery.param(dict);
+            var request = baseurl + strparams;
+            console.log(request);
+
+            window.location.replace(request);
+//            $.ajax({
+//                url: request,
+//                success: function () {
+//                    alert('Success!');
+//                }
+//            });
+
+        }
+    </script>
+    <script>
+        var geoJSONLayer;
+        function loadDataToMap(data) {
+            var decomp_data = JSON.parse(data);
+//            alert(data);
+            if (geoJSONLayer) {
+                map.removeLayer(geoJSONLayer)
+            }
+            geoJSONLayer = L.geoJSON(decomp_data);
+            geoJSONLayer.addTo(map);
+        }
+    </script>
+    <script>
+        function convertDateToStr(date) {
+            var yyyy, mm, dd, strdate;
+            yyyy = date.getFullYear();
+            mm = date.getMonth() + 1;
+            dd = date.getDate();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+            strdate = yyyy + '-' + mm + '-' + dd;
+            return strdate
+
+        }
+    </script>
+</head>
+<body onload="doOnLoad();">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<div id="header" style="width: 100%; height: 5%; background-color: #3399cc">
+    <h1>Недвижимость Санкт-Петербурга</h1>
+</div>
+<div id="mainlayout">
+    <div id="mapid" style="width: 100%; height: 100%;"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script>window.jQuery || document.write('<script src="static/js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+<script src="static/js/plugins.js"></script>
+<script src="static/js/main.js"></script>
+
+</body>
+</html>

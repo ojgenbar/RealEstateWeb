@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DHTMLX</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="stylesheet" type="text/css" href="js/dhtmlxSuite_v50_std/codebase/fonts/font_roboto/roboto.css"/>
+    <link rel="stylesheet" type="text/css" href="js/dhtmlxSuite_v50_std/codebase/dhtmlx.css"/>
+    <script src="js/dhtmlxSuite_v50_std/codebase/dhtmlx.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.0.js"></script>
+    <link rel="stylesheet" href="js/leaflet/leaflet.css"/>
+    <script src="js/leaflet/leaflet.js"></script>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            overflow: hidden;
+        }
+    </style>
+    <style>
+        div#mainlayout {
+            position: relative;
+            /*margin-top: 10px;*/
+            /*margin-left: 10px;*/
+            width: 100%;
+            height: 90%;
+        }
+    </style>
+    <style>
+        div#accObj {
+            position: relative;
+            /*width: 360px;*/
+            /*height: 400px;*/
+            /*box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.09);*/
+        }
+    </style>
+    <script>
+        var mainLayout, map, myAcc, myForm, formData;
+        function doOnLoad() {
+            var windowWidth, windowHeight, aw, ah;
+            mainLayout = new dhtmlXLayoutObject({
+                parent: 'mainlayout',
+//                parent: document.body,
+                pattern: "3U",
+                cells: [{id: "a", text: "Map"},
+                    {id: "b", text: "Menu", width: 420},
+                    {id: "c", text: "Info"}
+                ]
+            });
+            windowWidth = $(document).find('#mainlayout').width();
+            windowHeight = $(document).find('#mainlayout').height();
+            aw = windowWidth * 0.5;
+            ah = windowHeight * 0.8;
+//            mainLayout.cells('a').setWidth(aw);
+            mainLayout.cells('a').setHeight(ah);
+
+            mainLayout.cells('a').attachObject('mapid');
+//            mainLayout.cells('b').attachObject('accObj');
+
+            mainLayout.cells('b').collapse();
+            mainLayout.cells('c').collapse();
+
+
+            map = L.map('mapid').setView([59.942959, 30.35], 10);
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                maxZoom: 18,
+                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                id: 'mapbox.streets'
+            }).addTo(map);
+//            alert([aw, ah]);
+
+            myAcc = mainLayout.cells('b').attachAccordion();
+            myAcc.addItem("a1", "Search parameters", true);
+            myAcc.addItem("a2", "Site Navigation");
+            myAcc.addItem("a3", "Support & Feedback");
+
+//            myAcc.cells('a2').attachURL();
+//            mainLayout.cells('b').attachAccordion(myAcc);
+            mainLayout.cells('b').expand();
+
+            formData = [
+	{type: "settings", position: "label-left", labelWidth: 90, inputWidth: 130},
+	{type: "block", width: "auto", blockOffset: "", offsetLeft: "10", offsetTop: "10", list: [
+		{type: "block", width: "auto", blockOffset: "0", list: [
+			{type: "label", label: "Комнат", value: "", labelWidth: "160"},
+			{type: "newcolumn", offset: "15"},
+			{type: "input", label: "от", labelWidth: "20", name: "qrooms1", value: "1", inputWidth: "50", labelAlign: "right", validate: "isValidInteger", userdataName: "qrooms1"},
+			{type: "newcolumn"},
+			{type: "input", label: "до", offsetLeft: "30", name: "qrooms2", labelAlign: "right", labelWidth: "20", inputWidth: "50", validate: "isValidInteger", value: "2"}
+		]},
+		{type: "block", width: "auto", blockOffset: "0", list: [
+			{type: "label", label: "Цена, тыс. руб.", value: "", labelWidth: "160"},
+			{type: "newcolumn", offset: "15"},
+			{type: "input", name: "price1", label: "от", labelWidth: "20", inputWidth: "50", labelAlign: "right", validate: "isValidNumeric", value: "3500"},
+			{type: "newcolumn"},
+			{type: "input", name: "price2", label: "до", offsetLeft: "30", labelAlign: "right", labelWidth: "20", inputWidth: "50", validate: "isValidNumeric", value: "3501"}
+		]},
+		{type: "block", width: "auto", blockOffset: "0", list: [
+			{type: "label", label: "Цена за кв. м., тыс. руб.", value: "", labelWidth: "160"},
+			{type: "newcolumn", offset: "15"},
+			{type: "input", name: "pricesqm1", label: "от", labelWidth: "20", inputWidth: "50", labelAlign: "right", validate: "isValidNumeric", value: "50"},
+			{type: "newcolumn"},
+			{type: "input", name: "pricesqm2", label: "до", offsetLeft: "30", labelAlign: "right", labelWidth: "20", inputWidth: "50", validate: "isValidNumeric", value: "150"}
+		]},
+		{type: "newcolumn"},
+		{type: "fieldset", width: "auto", label: "Площадь", blockOffset: 20, offsetTop: "15", list: [
+			{type: "block", width: "auto", blockOffset: "0", list: [
+				{type: "label", label: "Общая", value: "", labelWidth: "135"},
+				{type: "newcolumn", offset: "15"},
+				{type: "input", name: "area1", label: "от", labelWidth: "20", inputWidth: "50", labelAlign: "right", validate: "isValidNumeric", value: "50"},
+				{type: "newcolumn"},
+				{type: "input", name: "area2", label: "до", offsetLeft: "30", labelAlign: "right", labelWidth: "20", inputWidth: "50", validate: "isValidNumeric", value: "200"}
+			]},
+			{type: "block", width: "auto", blockOffset: "0", list: [
+				{type: "label", label: "Жилая", value: "", labelWidth: "135"},
+				{type: "newcolumn", offset: "15"},
+				{type: "input", name: "livingarea1", label: "от", labelWidth: "20", inputWidth: "50", labelAlign: "right", validate: "isValidNumeric", value: "52"},
+				{type: "newcolumn"},
+				{type: "input", name: "livingarea2", label: "до", offsetLeft: "30", labelAlign: "right", labelWidth: "20", inputWidth: "50", validate: "isValidNumeric", value: "195"}
+			]},
+			{type: "block", width: "auto", blockOffset: "0", list: [
+				{type: "label", label: "Кухни", value: "", labelWidth: "135"},
+				{type: "newcolumn", offset: "15"},
+				{type: "input", name: "kitchenarea1", label: "от", labelWidth: "20", inputWidth: "50", labelAlign: "right", validate: "isValidNumeric", value: "56"},
+				{type: "newcolumn"},
+				{type: "input", name: "kitchenarea2", label: "до", offsetLeft: "30", labelAlign: "right", labelWidth: "20", inputWidth: "50", validate: "isValidNumeric", value: "190"}
+			]}
+		]},
+		{type: "fieldset", width: "auto", label: "Даты", blockOffset: 20, offsetTop: "15", list: [
+			{type: "calendar", name: "date1", label: "с", labelWidth: "20", value: "2017-04-01"},
+			{type: "newcolumn"},
+			{type: "calendar", name: "date2", label: "по", labelWidth: "30", offsetLeft: "15", value: "2017-04-02"}
+		]}
+	]},
+	{type: "button", name: "buttonApply", label: "New Input", value: "Применить", offsetLeft: "10", offsetTop: "15"}
+];
+
+            myForm = myAcc.cells('a1').attachForm();
+//            myForm.loadStruct('settingsForm.json', function () {
+//            }, 'json');
+            myForm.loadStruct(formData);
+            myForm.enableLiveValidation(true);
+
+//            var qrooms1, q;
+//            qrooms1 = myForm.setItemValue("qrooms1", "2");
+//            qrooms1 = myForm.getItemValue("qrooms1");
+////            myForm.disableItem("qrooms1");
+//            console.log(qrooms1);
+
+            myForm.attachEvent("onButtonClick", doOnButtonApply);
+//            myForm.lock();
+        }
+    </script>
+    <script>
+        var qrooms1, qrooms2, price1, price2, pricesqm1, pricesqm2, area1, area2, livingarea1, livingarea2,
+            kitchenarea1, kitchenarea2, date1, date2;
+        function doOnButtonApply(name) {
+            qrooms1 = myForm.getItemValue("qrooms1");
+            qrooms2 = myForm.getItemValue("qrooms2");
+            price1 = myForm.getItemValue("price1");
+            price2 = myForm.getItemValue("price2");
+            pricesqm1 = myForm.getItemValue("pricesqm1");
+            pricesqm2 = myForm.getItemValue("pricesqm2");
+            area1 = myForm.getItemValue("area1");
+            area2 = myForm.getItemValue("area2");
+            livingarea1 = myForm.getItemValue("livingarea1");
+            livingarea2 = myForm.getItemValue("livingarea2");
+            kitchenarea1 = myForm.getItemValue("kitchenarea1");
+            kitchenarea2 = myForm.getItemValue("kitchenarea2");
+            date1 = convertDateToStr(myForm.getItemValue("date1"));
+            date2 = convertDateToStr(myForm.getItemValue("date2"));
+            console.log(qrooms1);
+            console.log(qrooms2);
+            console.log(price1);
+            console.log(price2);
+            console.log(pricesqm1);
+            console.log(pricesqm2);
+            console.log(area1);
+            console.log(area2);
+            console.log(livingarea1);
+            console.log(livingarea2);
+            console.log(kitchenarea1);
+            console.log(kitchenarea2);
+            console.log(date1);
+            console.log(date2);
+            console.log(typeof(kitchenarea1));
+        }
+    </script>
+    <script>
+        function convertDateToStr(date) {
+            var yyyy, mm, dd, strdate;
+            yyyy = date.getFullYear();
+            mm = date.getMonth() + 1;
+            dd = date.getDate();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+            strdate = yyyy + '-' + mm + '-' + dd;
+            return strdate
+
+        }
+    </script>
+</head>
+<body onload="doOnLoad();">
+
+<div id="header" style="width: 100%; height: 5%; background-color: #3399cc"></div>
+<div id="mainlayout">
+    <div id="mapid" style="width: 100%; height: 100%;"></div>
+</div>
+<!--<div id="mainlayout" style="width: 101%; height: 90%;"></div>-->
+
+</body>
+</html>
