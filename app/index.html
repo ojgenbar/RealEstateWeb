@@ -191,6 +191,9 @@
 
             mainLayout.cells('b').expand();
 
+            var curDateStr = convertDateToStr(new Date());
+
+
             formData = [
                 {type: "settings", position: "label-left", labelWidth: 90, inputWidth: 130},
                 {
@@ -294,7 +297,7 @@
                                 inputWidth: "50",
                                 labelAlign: "right",
                                 validate: "isValidNumeric",
-                                value: "50"
+                                value: "20"
                             },
                             {type: "newcolumn"},
                             {
@@ -306,7 +309,7 @@
                                 labelWidth: "20",
                                 inputWidth: "50",
                                 validate: "isValidNumeric",
-                                value: "200"
+                                value: "70"
                             }
                         ]
                         },
@@ -322,7 +325,7 @@
                                 inputWidth: "50",
                                 labelAlign: "right",
                                 validate: "isValidNumeric",
-                                value: "52"
+                                value: "10"
                             },
                             {type: "newcolumn"},
                             {
@@ -334,7 +337,7 @@
                                 labelWidth: "20",
                                 inputWidth: "50",
                                 validate: "isValidNumeric",
-                                value: "195"
+                                value: "70"
                             }
                         ]
                         },
@@ -350,7 +353,7 @@
                                 inputWidth: "50",
                                 labelAlign: "right",
                                 validate: "isValidNumeric",
-                                value: "56"
+                                value: "10"
                             },
                             {type: "newcolumn"},
                             {
@@ -362,7 +365,7 @@
                                 labelWidth: "20",
                                 inputWidth: "50",
                                 validate: "isValidNumeric",
-                                value: "190"
+                                value: "70"
                             }
                         ]
                         }
@@ -381,7 +384,7 @@
                                 inputWidth: "50",
                                 labelAlign: "right",
                                 validate: "isValidNumeric",
-                                value: "50"
+                                value: ""
                             },
                             {type: "newcolumn"},
                             {
@@ -393,7 +396,7 @@
                                 labelWidth: "20",
                                 inputWidth: "50",
                                 validate: "isValidNumeric",
-                                value: "200"
+                                value: ""
                             }
                         ]
                         },
@@ -409,7 +412,7 @@
                                 inputWidth: "50",
                                 labelAlign: "right",
                                 validate: "isValidNumeric",
-                                value: "52"
+                                value: ""
                             },
                             {type: "newcolumn"},
                             {
@@ -421,7 +424,7 @@
                                 labelWidth: "20",
                                 inputWidth: "50",
                                 validate: "isValidNumeric",
-                                value: "195"
+                                value: ""
                             }
                         ]
                         },
@@ -437,7 +440,7 @@
                                 inputWidth: "50",
                                 labelAlign: "right",
                                 validate: "isValidNumeric",
-                                value: "56"
+                                value: ""
                             },
                             {type: "newcolumn"},
                             {
@@ -449,7 +452,7 @@
                                 labelWidth: "20",
                                 inputWidth: "50",
                                 validate: "isValidNumeric",
-                                value: "190"
+                                value: ""
                             }
                         ]
                         }
@@ -457,7 +460,7 @@
                     },
                     {
                         type: "fieldset", width: "auto", label: "Даты", blockOffset: 20, offsetTop: "15", list: [
-                        {type: "calendar", name: "date1", label: "с", labelWidth: "20", value: "2017-04-01"},
+                        {type: "calendar", name: "date1", label: "с", labelWidth: "20", value: curDateStr},
                         {type: "newcolumn"},
                         {
                             type: "calendar",
@@ -465,7 +468,7 @@
                             label: "по",
                             labelWidth: "30",
                             offsetLeft: "15",
-                            value: "2017-04-01"
+                            value: curDateStr
                         }
                     ]
                     }
