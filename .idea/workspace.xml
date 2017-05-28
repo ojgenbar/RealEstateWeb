@@ -1,9 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="13877622-10e3-453f-8d87-abdc0ae65fef" name="Default" comment="">
+    <list default="true" id="13877622-10e3-453f-8d87-abdc0ae65fef" name="Default" comment="Edited">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0300/RealEstate_20170526_0300.dbf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0300/RealEstate_20170526_0300.prj" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0300/RealEstate_20170526_0300.shp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0300/RealEstate_20170526_0300.shx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0306/RealEstate_20170526_0306.dbf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0306/RealEstate_20170526_0306.prj" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0306/RealEstate_20170526_0306.shp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0306/RealEstate_20170526_0306.shx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0307/RealEstate_20170526_0307.dbf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0307/RealEstate_20170526_0307.prj" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0307/RealEstate_20170526_0307.shp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0307/RealEstate_20170526_0307.shx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0308/RealEstate_20170526_0308.dbf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0308/RealEstate_20170526_0308.prj" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0308/RealEstate_20170526_0308.shp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0308/RealEstate_20170526_0308.shx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0309/RealEstate_20170526_0309.dbf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0309/RealEstate_20170526_0309.prj" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0309/RealEstate_20170526_0309.shp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0309/RealEstate_20170526_0309.shx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0310/RealEstate_20170526_0310.dbf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0310/RealEstate_20170526_0310.prj" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0310/RealEstate_20170526_0310.shp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0310/RealEstate_20170526_0310.shx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0313.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0313/RealEstate_20170526_0313.dbf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0313/RealEstate_20170526_0313.prj" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0313/RealEstate_20170526_0313.shp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0313/RealEstate_20170526_0313.shx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0316.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0319.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0320.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0321.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0323.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0325.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0326.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170527_1352.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170527_1355.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170527_1507.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170528_1621.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/test1.rar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/wf/Flat1.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/wf/geojs.geojson" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/wf/in/bound.cpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/wf/in/bound.dbf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/wf/in/bound.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/wf/in/bound.prj" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/wf/in/bound.qpj" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/wf/in/bound.shp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/wf/in/bound.shx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/wf/q1.geojson" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/wf/splitfile.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/wf/splitfile.xyu" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/wf/splitfile2.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/wf/temp_files/1.dbf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/wf/temp_files/1.prj" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/wf/temp_files/1.shp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/wf/temp_files/1.shx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/wf/wf1.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/wf/wf2.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/wf/wf3.py" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/index.html" afterPath="$PROJECT_DIR$/app/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,11 +88,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="622" column="0" lean-forward="true" selection-start-line="622" selection-start-column="0" selection-end-line="622" selection-end-column="0" />
+            <state relative-caret-position="229">
+              <caret line="616" column="38" lean-forward="true" selection-start-line="616" selection-start-column="38" selection-end-line="616" selection-end-column="38" />
               <folding>
                 <marker date="1496009502133" expanded="true" signature="6429:6435" ph="©" />
                 <marker date="1496009502133" expanded="true" signature="6955:6961" ph="©" />
@@ -52,11 +113,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="48" column="6" lean-forward="false" selection-start-line="48" selection-start-column="6" selection-end-line="48" selection-end-column="6" />
+            <state relative-caret-position="248">
+              <caret line="212" column="13" lean-forward="true" selection-start-line="212" selection-start-column="13" selection-end-line="212" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -135,9 +196,9 @@
         <option value="$PROJECT_DIR$/queryFunc.py" />
         <option value="$PROJECT_DIR$/app/views.py" />
         <option value="$PROJECT_DIR$/app/static/.gitignore" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/../Geocoder/.gitignore" />
         <option value="$PROJECT_DIR$/app/index.html" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -189,60 +250,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="RealEstateWeb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RealEstateWeb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RealEstateWeb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RealEstateWeb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RealEstateWeb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RealEstateWeb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RealEstateWeb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -624,7 +631,14 @@
       <option name="project" value="LOCAL" />
       <updated>1496008879261</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Edited">
+      <created>1496010678517</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1496010678517</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -633,13 +647,13 @@
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.503125" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.496875" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39955106" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -692,6 +706,14 @@
               </option>
               <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
                 <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
               </option>
             </State>
           </value>
@@ -975,14 +997,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/static/.gitignore" />
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="48" column="6" lean-forward="false" selection-start-line="48" selection-start-column="6" selection-end-line="48" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../Geocoder/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -1001,14 +1015,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="622" column="0" lean-forward="true" selection-start-line="622" selection-start-column="0" selection-end-line="622" selection-end-column="0" />
+        <state relative-caret-position="229">
+          <caret line="616" column="38" lean-forward="true" selection-start-line="616" selection-start-column="38" selection-end-line="616" selection-end-column="38" />
           <folding>
             <marker date="1496009502133" expanded="true" signature="6429:6435" ph="©" />
             <marker date="1496009502133" expanded="true" signature="6955:6961" ph="©" />
             <marker date="1496009502133" expanded="true" signature="27424:27577" ph="..." />
             <marker date="1496009502133" expanded="true" signature="27517:27545" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="212" column="13" lean-forward="true" selection-start-line="212" selection-start-column="13" selection-end-line="212" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>

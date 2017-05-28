@@ -197,8 +197,7 @@ parts/
 var/
 sdist/
 develop-eggs/
-uploads/
-wf/
+
 .installed.cfg
 
 # Installer logs
@@ -213,3 +212,5 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+/uploads/
+/wf/
