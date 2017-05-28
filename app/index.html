@@ -101,7 +101,7 @@
 //                parent: document.body,
                 pattern: "3U",
                 cells: [{id: "a", text: "Карта"},
-                    {id: "b", text: "Меню", width: 420},
+                    {id: "b", text: "Меню", width: 425},
                     {id: "c", text: "Информация"}
                 ]
             });
@@ -115,6 +115,7 @@
             mainLayout.cells('a').attachObject('mapid');
 //            mainLayout.cells('b').attachObject('accObj');
 
+            mainLayout.cells('b').fixSize(true, false);
             mainLayout.cells('b').collapse();
             mainLayout.cells('c').collapse();
 
