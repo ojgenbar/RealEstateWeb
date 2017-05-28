@@ -2,14 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13877622-10e3-453f-8d87-abdc0ae65fef" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/RealEstateWeb.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/preferred-vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/build.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/build.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/deps.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/docs-index.leafdoc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/docs-misc.leafdoc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/docs.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/hintrc.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/leafdoc-templates/comments.hbs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/leafdoc-templates/constructor.hbs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/leafdoc-templates/crs.hbs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/leafdoc-templates/destructor.hbs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/leafdoc-templates/event.hbs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/leafdoc-templates/example.hbs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/leafdoc-templates/factory.hbs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/leafdoc-templates/function.hbs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/leafdoc-templates/html.hbs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/leafdoc-templates/inherited.hbs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/leafdoc-templates/method.hbs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/leafdoc-templates/namespace.hbs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/leafdoc-templates/option.hbs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/leafdoc-templates/pane.hbs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/leafdoc-templates/projection.hbs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/leafdoc-templates/property.hbs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/leafdoc-templates/section.hbs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/leafdoc-templates/supersection.hbs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/leaflet.draw-include.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/build/publish.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/dist/images/layers-2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/dist/images/layers.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/dist/images/marker-icon-2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/dist/images/marker-icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/dist/images/marker-shadow.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/dist/images/spritesheet-2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/dist/images/spritesheet.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/static/js/Leaflet.draw/dist/images/spritesheet.svg" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0300/RealEstate_20170526_0300.dbf" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0300/RealEstate_20170526_0300.prj" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/uploads/RealEstate_20170526_0300/RealEstate_20170526_0300.shp" afterPath="" />
@@ -72,6 +99,7 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/wf/wf2.py" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/wf/wf3.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -98,8 +126,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="121" column="55" lean-forward="true" selection-start-line="121" selection-start-column="55" selection-end-line="121" selection-end-column="55" />
+            <state relative-caret-position="2057">
+              <caret line="121" column="55" lean-forward="false" selection-start-line="121" selection-start-column="55" selection-end-line="121" selection-end-column="55" />
               <folding>
                 <marker date="1496000231376" expanded="true" signature="6373:6379" ph="©" />
                 <marker date="1496000231376" expanded="true" signature="6899:6905" ph="©" />
@@ -114,7 +142,7 @@
         <entry file="file://$PROJECT_DIR$/.gitattributes">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
-              <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -123,8 +151,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="203" column="3" lean-forward="true" selection-start-line="203" selection-start-column="3" selection-end-line="203" selection-end-column="3" />
+            <state relative-caret-position="133">
+              <caret line="192" column="10" lean-forward="true" selection-start-line="192" selection-start-column="10" selection-end-line="192" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -235,6 +263,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -273,8 +303,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -283,6 +311,7 @@
     <property name="js.eslint.eslintPackage" value="" />
     <property name="editor.config.accepted" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/GitHub/PortableGit_f02737a78695063deace08e96d5042710d3e32db/cmd/git.exe" />
+    <property name="add_unversioned_files" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -444,6 +473,12 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
@@ -601,19 +636,26 @@
       <option name="project" value="LOCAL" />
       <updated>1496001887949</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="1">
+      <created>1496002549124</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1496002549124</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="1010" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Debug Logs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.503125" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -978,15 +1020,15 @@
     <entry file="file://$PROJECT_DIR$/.gitattributes">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
-          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="121" column="55" lean-forward="true" selection-start-line="121" selection-start-column="55" selection-end-line="121" selection-end-column="55" />
+        <state relative-caret-position="2057">
+          <caret line="121" column="55" lean-forward="false" selection-start-line="121" selection-start-column="55" selection-end-line="121" selection-end-column="55" />
           <folding>
             <marker date="1496000231376" expanded="true" signature="6373:6379" ph="©" />
             <marker date="1496000231376" expanded="true" signature="6899:6905" ph="©" />
@@ -998,8 +1040,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="203" column="3" lean-forward="true" selection-start-line="203" selection-start-column="3" selection-end-line="203" selection-end-column="3" />
+        <state relative-caret-position="133">
+          <caret line="192" column="10" lean-forward="true" selection-start-line="192" selection-start-column="10" selection-end-line="192" selection-end-column="10" />
           <folding />
         </state>
       </provider>
