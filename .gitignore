@@ -212,7 +212,9 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
-/uploads/
-/wf/
+
 uploads/
 wf/
+/uploads/
+/wf/
+!/app/static/
