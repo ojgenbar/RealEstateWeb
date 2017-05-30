@@ -59,13 +59,3 @@ def download():
     filename = os.path.basename(save_query(qoptions))
     print '\n%s\n%s\n' % (uploads, filename)
     return send_from_directory(directory=uploads, filename=filename, as_attachment=True)
-
-
-@app.route('/api')
-def js():
-    data = open(r'wf/q1.geojson').read()
-    return data
-
-
-# if __name__ == '__main__':
-#     re_query()
