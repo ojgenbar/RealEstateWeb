@@ -32,12 +32,31 @@ def qoptions_from_request(args):
 
     qoptions.date1 = datetime.date(*(int(i) for i in args['date1'].split('-')))
     qoptions.date2 = datetime.date(*(int(i) for i in args['date2'].split('-')))
-    qoptions.price1 = args['price1'] or None
-    qoptions.price2 = args['price2'] or None
-    qoptions.price_sqm1 = args['price_sqm1'] or None
-    qoptions.price_sqm2 = args['price_sqm2'] or None
+    qoptions.price1 = float(args['price1']) or None
+    qoptions.price2 = float(args['price2']) or None
+    qoptions.area1 = float(args['area1']) or None
+    qoptions.area2 = float(args['area2']) or None
+    qoptions.price_sqm1 = float(args['price_sqm1']) or None
+    qoptions.price_sqm2 = float(args['price_sqm2']) or None
+    qoptions.qrooms1 = int(args['qrooms1']) or None
+    qoptions.qrooms2 = int(args['qrooms2']) or None
+
+    # qoptions.floor1 = float(args['floor1']) or None
+    # qoptions.floor2 = float(args['floor2']) or None
+    # qoptions.floors1 = float(args['floors1']) or None
+    # qoptions.floors2 = float(args['floors2']) or None
+    # qoptions.kitchen_area1 = args['kitchen_area1'] or None
+    # qoptions.kitchen_area2 = args['kitchen_area2'] or None
+    # qoptions.living_area1 = args['living_area1'] or None
+    # qoptions.living_area2 = args['living_area2'] or None
+    # qoptions.building_types = args['building_types'] or None
+    # qoptions.bathrooms = args['bathrooms'] or None
+    # qoptions.abilities = args['abilities'] or None
+    # qoptions.agency = args['agency'] or None
+    # qoptions.districts = args['districts'] or None
 
     qoptions.prettify()
+    print qoptions
     return qoptions
 
 

@@ -56,7 +56,6 @@ class QueryOptions:
             if not self.price1:
                 self.price1 = 0
             if not self.price2:
-                print 'asdkasokfaskf59'
                 self.price2 = 1000000
 
         if self.qrooms1 or self.qrooms2:
