@@ -16,6 +16,13 @@ def not_found(error):
     return 'Ошибка: 404 %s' % error
 
 
+@app.route('/')
+@app.route('/index')
+@app.route('/index.html')
+def index():
+    return open(os.path.join(DIRNAME, 'index.html')).read()
+
+
 def qoptions_from_request(args):
     qoptions = QueryOptions()
 
@@ -27,6 +34,8 @@ def qoptions_from_request(args):
     qoptions.date2 = datetime.date(*(int(i) for i in args['date2'].split('-')))
     qoptions.price1 = args['price1'] or None
     qoptions.price2 = args['price2'] or None
+    qoptions.price_sqm1 = args['price_sqm1'] or None
+    qoptions.price_sqm2 = args['price_sqm2'] or None
 
     qoptions.prettify()
     return qoptions
@@ -40,13 +49,6 @@ def query():
     print 'Count: %s' % count
     print sorted([i for i in dir(qoptions) if not i.startswith('_')])
     return res
-
-
-@app.route('/')
-@app.route('/index')
-@app.route('/index.html')
-def index():
-    return open(os.path.join(DIRNAME, 'index.html')).read()
 
 
 @app.route('/download')
