@@ -372,48 +372,20 @@
                     ]
                     },{
                         type: "fieldset", width: "auto", label: "Расстояние", blockOffset: 20, offsetTop: "15", list: [
-                        {
+                                                    {
                             type: "block", width: "auto", blockOffset: "0", list: [
-                            {type: "label", label: "До метро", value: "", labelWidth: "135"},
+                            {type: "label", label: "До парков и скверов", value: "", labelWidth: "223"},
                             {type: "newcolumn", offset: "15"},
-                            {
-                                type: "input",
-                                name: "subway1",
-                                label: "от",
-                                labelWidth: "20",
-                                inputWidth: "50",
-                                labelAlign: "right",
-                                validate: "isValidNumeric",
-                                value: ""
-                            },
-                            {type: "newcolumn"},
-                            {
-                                type: "input",
-                                name: "subway2",
-                                label: "до",
-                                offsetLeft: "30",
-                                labelAlign: "right",
-                                labelWidth: "20",
-                                inputWidth: "50",
-                                validate: "isValidNumeric",
-                                value: ""
-                            }
-                        ]
-                        },
-                        {
-                            type: "block", width: "auto", blockOffset: "0", list: [
-                            {type: "label", label: "До парков и скверов", value: "", labelWidth: "135"},
-                            {type: "newcolumn", offset: "15"},
-                            {
-                                type: "input",
-                                name: "park1",
-                                label: "от",
-                                labelWidth: "20",
-                                inputWidth: "50",
-                                labelAlign: "right",
-                                validate: "isValidNumeric",
-                                value: ""
-                            },
+//                            {
+//                                type: "input",
+//                                name: "park1",
+//                                label: "от",
+//                                labelWidth: "20",
+//                                inputWidth: "50",
+//                                labelAlign: "right",
+//                                validate: "isValidNumeric",
+//                                value: ""
+//                            },
                             {type: "newcolumn"},
                             {
                                 type: "input",
@@ -430,11 +402,11 @@
                         },
                         {
                             type: "block", width: "auto", blockOffset: "0", list: [
-                            {type: "label", label: "До КАД (с ЗСД)", value: "", labelWidth: "135"},
+                            {type: "label", label: "До метро", value: "", labelWidth: "135"},
                             {type: "newcolumn", offset: "15"},
                             {
                                 type: "input",
-                                name: "road1",
+                                name: "metro1",
                                 label: "от",
                                 labelWidth: "20",
                                 inputWidth: "50",
@@ -445,7 +417,35 @@
                             {type: "newcolumn"},
                             {
                                 type: "input",
-                                name: "road2",
+                                name: "metro2",
+                                label: "до",
+                                offsetLeft: "30",
+                                labelAlign: "right",
+                                labelWidth: "20",
+                                inputWidth: "50",
+                                validate: "isValidNumeric",
+                                value: ""
+                            }
+                        ]
+                        },
+                        {
+                            type: "block", width: "auto", blockOffset: "0", list: [
+                            {type: "label", label: "До КАД (с ЗСД)", value: "", labelWidth: "135"},
+                            {type: "newcolumn", offset: "15"},
+                            {
+                                type: "input",
+                                name: "kad1",
+                                label: "от",
+                                labelWidth: "20",
+                                inputWidth: "50",
+                                labelAlign: "right",
+                                validate: "isValidNumeric",
+                                value: ""
+                            },
+                            {type: "newcolumn"},
+                            {
+                                type: "input",
+                                name: "kad2",
                                 label: "до",
                                 offsetLeft: "30",
                                 labelAlign: "right",
@@ -528,6 +528,12 @@
             kitchenarea2 = parametersForm.getItemValue("kitchenarea2");
             date1 = convertDateToStr(parametersForm.getItemValue("date1"));
             date2 = convertDateToStr(parametersForm.getItemValue("date2"));
+            var dmetro1 = parametersForm.getItemValue("metro1");
+            var dmetro2 = parametersForm.getItemValue("metro2");
+//            var dpark1 = parametersForm.getItemValue("park1");
+            var dpark2 = parametersForm.getItemValue("park2");
+            var dkad1 = parametersForm.getItemValue("kad1");
+            var dkad2 = parametersForm.getItemValue("kad2");
 
             exportFormat = downloadForm.getItemValue("format");
 
@@ -550,7 +556,13 @@
                 date1: date1,
                 date2: date2,
                 bound: dataJSON,
-                exportFormat: exportFormat
+                exportFormat: exportFormat,
+                dmetro1: dmetro1,
+                dmetro2: dmetro2,
+//                dpark1: dpark1,
+                dpark2: dpark2,
+                dkad1: dkad1,
+                dkad2: dkad2
             };
             return parametersDict
         }

@@ -4,6 +4,7 @@ from app import app
 from flask import request, send_from_directory
 import json
 from queryFunc import QueryOptions, query_to_geojson, save_query
+import time
 import datetime
 from shapely.geometry import MultiPolygon, Polygon, shape
 
@@ -32,14 +33,70 @@ def qoptions_from_request(args):
 
     qoptions.date1 = datetime.date(*(int(i) for i in args['date1'].split('-')))
     qoptions.date2 = datetime.date(*(int(i) for i in args['date2'].split('-')))
-    qoptions.price1 = float(args['price1']) or None
-    qoptions.price2 = float(args['price2']) or None
-    qoptions.area1 = float(args['area1']) or None
-    qoptions.area2 = float(args['area2']) or None
-    qoptions.price_sqm1 = float(args['price_sqm1']) or None
-    qoptions.price_sqm2 = float(args['price_sqm2']) or None
-    qoptions.qrooms1 = int(args['qrooms1']) or None
-    qoptions.qrooms2 = int(args['qrooms2']) or None
+    try:
+        qoptions.price1 = float(args['price1'])
+    except ValueError:
+        pass
+    try:
+        qoptions.price2 = float(args['price2']) or None
+    except ValueError:
+        pass
+    try:
+        qoptions.area1 = float(args['area1'])
+    except ValueError:
+        pass
+    try:
+        qoptions.area2 = float(args['area2'])
+    except ValueError:
+        pass
+    try:
+        qoptions.price_sqm1 = float(args['price_sqm1'])
+    except ValueError:
+        pass
+    try:
+        qoptions.price_sqm2 = float(args['price_sqm2'])
+    except ValueError:
+        pass
+    try:
+        qoptions.qrooms1 = int(args['qrooms1'])
+    except ValueError:
+        pass
+    try:
+        qoptions.qrooms2 = int(args['qrooms2'])
+    except ValueError:
+        pass
+    try:
+        qoptions.dmetro1 = int(args['dmetro1'])
+    except ValueError:
+        pass
+    try:
+        qoptions.dmetro2 = int(args['dmetro2'])
+    except ValueError:
+        pass
+    try:
+        qoptions.dmetro1 = int(args['dmetro1'])
+    except ValueError:
+        pass
+    try:
+        qoptions.dmetro2 = int(args['dmetro2'])
+    except ValueError:
+        pass
+    try:
+        qoptions.dkad1 = int(args['dkad1'])
+    except ValueError:
+        pass
+    try:
+        qoptions.dkad2 = int(args['dkad2'])
+    except ValueError:
+        pass
+    # try:
+    #     qoptions.dpark1 = int(args['dpark1'])
+    # except ValueError:
+    #     pass
+    try:
+        qoptions.dpark2 = int(args['dpark2'])
+    except ValueError:
+        pass
 
     # qoptions.floor1 = float(args['floor1']) or None
     # qoptions.floor2 = float(args['floor2']) or None
@@ -62,11 +119,15 @@ def qoptions_from_request(args):
 
 @app.route('/query')
 def query():
+    tstart = time.time()
     args = request.args
     qoptions = qoptions_from_request(args)
     count, res = query_to_geojson(qoptions, maxcount=500)
+    print '_'*120
     print 'Count: %s' % count
-    print sorted([i for i in dir(qoptions) if not i.startswith('_')])
+    print 'Query time: %s sec.' % (time.time()-tstart)
+    # print sorted([i for i in dir(qoptions) if not i.startswith('_')])
+
     return res
 
 

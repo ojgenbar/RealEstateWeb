@@ -9,8 +9,9 @@ import shutil
 
 tstart = time.time()
 sys.path.append(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'RealEstateORM'))
-from ORMBase import session, Flat, District, Price_history, Address
+from ORMBase import session, Flat, District, Price_history, Address, Metro, Parks, Kad
 from geoalchemy2.shape import to_shape
+# from geoalchemy2.functions import ST_Transform
 from shapely.geometry import mapping, Polygon
 import shapefile
 
@@ -43,7 +44,15 @@ class QueryOptions:
         self.abilities = None
         self.agency = None
         self.districts = None
+        # User polygon
         self.boundary = None
+        # Distances
+        self.dpark1 = None
+        self.dpark2 = None
+        self.dmetro1 = None
+        self.dmetro2 = None
+        self.dkad1 = None
+        self.dkad2 = None
 
     def prettify(self):
         if self.date1 or self.date2:
@@ -96,6 +105,23 @@ class QueryOptions:
             if not self.kitchen_area2:
                 self.kitchen_area2 = 1000000
 
+        if self.dmetro1 or self.dmetro2:
+            if not self.dmetro1:
+                self.dmetro1 = 0
+            if not self.dmetro2:
+                self.dmetro2 = 1000000
+        #
+        # if self.dpark1 or self.dpark2:
+        #     if not self.dpark1:
+        #         self.dpark1 = 0
+        #     if not self.dpark2:
+        #         self.dpark2 = 1000000
+
+        if self.dkad1 or self.dkad2:
+            if not self.dkad1:
+                self.dkad1 = 0
+            if not self.dkad2:
+                self.dkad2 = 1000000
 
 class Listing:
     def __init__(self):
@@ -239,17 +265,35 @@ def build_query(qoptions):
         query = query.filter(Flat.bathroom.in_(qoptions.bathrooms))
 
     query = query.join(Address, Address.id == Flat.address_id)
-    if qoptions.boundary:
-        bound_wkt = qoptions.boundary.wkt
-        bound = 'SRID=4326; %s' % bound_wkt
-        # print bound
-        query = query.filter(Address.geom.ST_CoveredBy(bound))
+
     if qoptions.building_types:
         query = query.filter(Address.building_type.in_(qoptions.building_types))
     if qoptions.floors1:
         query = query.filter(Address.floors >= qoptions.floors1,
                              Address.floors <= qoptions.floors2)
     query = query.join(District, District.id == Address.district_id)
+
+    if qoptions.boundary:
+        bound_wkt = qoptions.boundary.wkt
+        bound = 'SRID=4326; %s' % bound_wkt
+        # print bound
+        query = query.filter(Address.geom.ST_CoveredBy(bound))
+
+    # Querying by spatial parameters
+    if qoptions.dmetro1:
+        print '\nMetro\n'
+        # query = query.filter(Address.geom.ST_Transform(32636).ST_DWithin(Metro.geom, qoptions.dmetro2))
+        query = query.filter(Address.geom.ST_Transform(32636).ST_Distance(Metro.geom) >= qoptions.dmetro1,
+                             Address.geom.ST_Transform(32636).ST_Distance(Metro.geom) <= qoptions.dmetro2)
+    if qoptions.dpark2:
+        print '\nPark\n'
+        query = query.filter(Address.geom.ST_Transform(32636).ST_DWithin(Parks.geom, qoptions.dpark2))
+
+    if qoptions.dkad1:
+        print '\nKAD\n'
+        query = query.filter(Address.geom.ST_Transform(32636).ST_Distance(Kad.geom) >= qoptions.dkad1,
+                             Address.geom.ST_Transform(32636).ST_Distance(Kad.geom) <= qoptions.dkad2)
+
     if qoptions.districts:
         query = query.filter(District.name.in_(qoptions.districts))
     return query
