@@ -93,7 +93,7 @@
     </style>
 
     <script>
-        var mainLayout, map, myAcc, formData, parametersForm, downloadForm;
+        var mainLayout, map, myAcc, formData, parametersForm, downloadForm, infoTable;
         function doOnLoad() {
             var windowWidth, windowHeight, aw, ah;
             mainLayout = new dhtmlXLayoutObject({
@@ -130,8 +130,6 @@
             };
 
             var imageUrl = 'static/raster/AVERAGE-3857-colored-2.png',
-//                imageBounds = [[29.4295413702639657,59.6339240289425589],[30.7588085944611471,60.2449766598578051]];
-//                imageBounds = [[59.633924028, 29.429541370], [60.2449766598, 30.758808594]];
                 imageBounds = [[59.6339240289707959, 29.4295413701381676], [60.2449766597451273, 30.7587528125922631]];
             var im = L.imageOverlay(imageUrl, imageBounds, {opacity: 0.65}).addTo(map);
 
@@ -504,6 +502,9 @@
             downloadForm = myAcc.cells('a3').attachForm();
             downloadForm.loadStruct(formData);
 
+            infoTable = mainLayout.cells('c').attachGrid();
+            mainLayout.cells('c').expand();
+
             parametersForm.attachEvent("onButtonClick", doOnButtonApply);
             downloadForm.attachEvent("onButtonClick", doOnButtonDownload);
         }
@@ -579,10 +580,6 @@
             var request = baseurl + strparams;
             console.log(request);
 
-//            drawnItems.getLayers().forEach(function (entry) {
-//               alert(typeof entry);
-//               alert(typeof entry.toGeoJSON())
-//            });
             $.ajax({
                 url: request,
                 success: function (data) {
@@ -602,12 +599,7 @@
             console.log(request);
 
             window.location.replace(request);
-//            $.ajax({
-//                url: request,
-//                success: function () {
-//                    alert('Success!');
-//                }
-//            });
+
 
         }
     </script>

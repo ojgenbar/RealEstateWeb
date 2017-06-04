@@ -217,8 +217,7 @@ uploads/
 wf/
 /uploads/
 /wf/
-!/app/static/
 /TODO
 /deglength.py
-/app/static/
+
 /.idea/
