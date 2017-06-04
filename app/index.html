@@ -619,8 +619,22 @@
             if (geoJSONLayer) {
                 map.removeLayer(geoJSONLayer)
             }
-            geoJSONLayer = L.geoJSON(decomp_data);
+            geoJSONLayer = L.geoJSON(decomp_data, {
+                onEachFeature: onEachFeature
+            });
             geoJSONLayer.addTo(map);
+        }
+
+        function onEachFeature(feature, layer) {
+
+            var popupStr = ''.concat("<h2>", feature['properties']['ru_address'], "</h2><br>");
+            popupStr = ''.concat(popupStr, "Цена: ", "</b>", feature['properties']['price'], "тыс. руб.", "<br>");
+            popupStr = ''.concat(popupStr, "<br>", "<b>", "Описание: ", "</b>", feature['properties']['description'], "<br>");
+            popupStr = ''.concat(
+                popupStr, "<br>", "<b>", "Ссылка: ", "</b>",
+                '<a href="', feature['properties']['link'], '" target="_blank">Посмотреть на источнике<\a>', "<br>");
+            layer.bindPopup(popupStr);
+            console.log(feature);
         }
     </script>
     <script>
