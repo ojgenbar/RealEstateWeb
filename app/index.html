@@ -16,9 +16,9 @@
     <script src="static/js/vendor/modernizr-2.8.3.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <link rel="stylesheet" type="text/css" href="static/js/dhtmlxSuite_v50_std/codebase/fonts/font_roboto/roboto.css"/>
-    <link rel="stylesheet" type="text/css" href="static/js/dhtmlxSuite_v50_std/codebase/dhtmlx.css"/>
-    <script src="static/js/dhtmlxSuite_v50_std/codebase/dhtmlx.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/js/dhtmlxSuite_v51_std/codebase/fonts/font_roboto/roboto.css"/>
+    <link rel="stylesheet" type="text/css" href="static/js/dhtmlxSuite_v51_std/codebase/dhtmlx.css"/>
+    <script src="static/js/dhtmlxSuite_v51_std/codebase/dhtmlx.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.0.js"></script>
     <link rel="stylesheet" href="static/js/leaflet/leaflet.css"/>
     <script src="static/js/leaflet/leaflet.js"></script>
@@ -504,9 +504,21 @@
 
             infoTable = mainLayout.cells('c').attachGrid();
             mainLayout.cells('c').expand();
+            infoTable.setImagePath("static/js/dhtmlxSuite_v50_std/codebase/imgs/");
+            infoTable.load("static/table_init.xml");
+            infoTable.enableCellIds(true);
+            infoTable.deleteRow(0);
+
+            var w = infoTable.getColumnsNum();
+            console.log(w);
+            console.log(infoTable);
+            var w = infoTable.columnIds;
+            console.log(w);
 
             parametersForm.attachEvent("onButtonClick", doOnButtonApply);
             downloadForm.attachEvent("onButtonClick", doOnButtonDownload);
+
+            doOnButtonApply();
         }
     </script>
 

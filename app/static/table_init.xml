@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<rows>
+    <head>
+        <column id='district' width='140' align='left' type='ed' sort='str' color=''>Район</column>
+        <column id='address' width='200' align='left' type='ed' sort='str' color=''>Адрес</column>
+        <column id='rooms' width='50' align='left' type='ed' sort='int' color=''>Комнат</column>
+        <column id='floor' width='40' align='left' type='ed' sort='int' color=''>Этаж</column>
+        <column id='floors' width='50' align='left' type='ed' sort='int' color=''>Этажей</column>
+        <column id='building_type' width='65' align='left' type='ed' sort='str' color=''>Тип постройки</column>
+        <column id='area' width='60' align='left' type='ed' sort='int' color=''>Общая площадь</column>
+        <column id='living_area' width='60' align='left' type='ed' sort='str' color=''>Жилая площадь</column>
+        <column id='kitchen_area' width='60' align='left' type='ed' sort='str' color=''>Кухни площадь</column>
+        <column id='bathroom' width='60' align='left' type='ed' sort='str' color=''>Санузел</column>
+        <column id='price' width='50' align='left' type='ed' sort='int' color=''>Цена</column>
+        <column id='price_sqm' width='50' align='left' type='ed' sort='int' color=''>Цена кв. м.</column>
+        <column id='abilities' width='50' align='left' type='ed' sort='str' color=''>Доп. условия</column>
+        <column id='agency' width='60' align='left' type='ed' sort='str' color=''>Агентство</column>
+        <column id='tel' width='100' align='left' type='ed' sort='str' color=''>Телефон</column>
+        <column align='left' type='ed' id='description' sort='str' color=''>Описание</column>
+        <column id='link' width='50' align='right' type='ed' sort='str' color=''>Ссылка</column>
+        17
+    </head>
+    <row id='1'>
+        <cell>Московский район</cell>
+        <cell>Космонавтов пр. 65 к.11</cell>
+        <cell>2</cell>
+        <cell>2</cell>
+        <cell>16</cell>
+        <cell>РЕК</cell>
+        <cell>71</cell>
+        <cell>42</cell>
+        <cell>12</cell>
+        <cell>Р</cell>
+        <cell>5400</cell>
+        <cell>129.4964029</cell>
+        <cell></cell>
+        <cell></cell>
+        <cell>(921) 9062392</cell>
+        <cell>Готовая квартира с ремонтом, и с...</cell>
+        <cell>http://www.bn.ru/detail/pflats/1031025.html?from=psearch</cell>
+    </row>
+</rows>
