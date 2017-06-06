@@ -137,7 +137,14 @@ def download():
     qoptions = qoptions_from_request(args)
 
     uploads = os.path.join(os.path.dirname(DIRNAME), 'uploads')
+    export_format = args['exportFormat']
+    if export_format == 'ESRI Shapefile':
+        export_ext = '.shp'
+    elif export_format == 'GeoJSON':
+        export_ext = '.geojson'
+    else:
+        raise ValueError('Unknown export format')
 
-    filename = os.path.basename(save_query(qoptions))
+    filename = os.path.basename(save_query(qoptions, ftype=export_ext))
     print '\n%s\n%s\n' % (uploads, filename)
     return send_from_directory(directory=uploads, filename=filename, as_attachment=True)

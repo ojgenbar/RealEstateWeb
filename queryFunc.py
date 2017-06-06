@@ -335,7 +335,6 @@ def query_to_shp(qoptions, path, maxcount=None):
         path = name
 
     query = build_query(qoptions)
-    res = []
 
     writer = shapefile.Writer(shapefile.POINT)
     writer.autoBalance = 1
@@ -414,6 +413,11 @@ def save_query(qoptions, ftype='.shp'):
         query_to_shp(qoptions,
                      os.path.join(temp_folder_path, filename),
                      maxcount=10000)
+    elif ftype.lower() == '.geojson':
+        count, data = query_to_geojson(
+            qoptions,
+            maxcount=10000)
+        open(os.path.join(temp_folder_path, filename+'.geojson'), 'w').write(data)
     shutil.make_archive(temp_folder_path, 'zip', temp_folder_path)
     shutil.rmtree(temp_folder_path)
     return temp_folder_path + '.zip'
