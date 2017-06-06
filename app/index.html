@@ -458,7 +458,9 @@
                     },
                     {
                         type: "fieldset", width: "auto", label: "Даты", blockOffset: 20, offsetTop: "15", list: [
-                        {type: "calendar", name: "date1", label: "с", labelWidth: "20", value: curDateStr},
+                        {type: "calendar", name: "date1", label: "с", labelWidth: "20",
+                            value: curDateStr},
+//                            value: '2017-06-04'},
                         {type: "newcolumn"},
                         {
                             type: "calendar",
@@ -503,17 +505,20 @@
             downloadForm.loadStruct(formData);
 
             infoTable = mainLayout.cells('c').attachGrid();
-            mainLayout.cells('c').expand();
-            infoTable.setImagePath("static/js/dhtmlxSuite_v50_std/codebase/imgs/");
-            infoTable.load("static/table_init.xml");
+//            mainLayout.cells('c').expand();
+            infoTable.setImagePath("static/js/dhtmlxSuite_v51_std/codebase/imgs/");
+//            infoTable.load("static/table_init.xml");
+//            infoTable.clearAndLoad("static/table_init.xml");
             infoTable.enableCellIds(true);
-            infoTable.deleteRow(0);
+//            infoTable.setColumnIds("district,address,rooms,floor,floors,building_type,area,living_area,kitchen_area,bathroom,price,price_sqm,abilities,agency,tel,description,link");
+            infoTable.setHeader("Sales,Book Title,Author");
+			infoTable.setInitWidths("80,150,100");
+			infoTable.setColAlign("right,left,left");
+			infoTable.setColTypes("ed,ed,ed");
+			infoTable.init();
 
-            var w = infoTable.getColumnsNum();
-            console.log(w);
-            console.log(infoTable);
-            var w = infoTable.columnIds;
-            console.log(w);
+
+            infoTable.attachEvent("onRowDblClicked",doOnRowDblClicked);
 
             parametersForm.attachEvent("onButtonClick", doOnButtonApply);
             downloadForm.attachEvent("onButtonClick", doOnButtonDownload);
@@ -523,6 +528,11 @@
     </script>
 
     <script>
+
+        function doOnRowDblClicked(rowId) {
+            alert(rowId);
+        }
+
         var parametersDict;
         function getQueryParameters() {
             var qrooms1, qrooms2, price1, price2, pricesqm1, pricesqm2, area1, area2, livingarea1, livingarea2,
@@ -583,7 +593,12 @@
     </script>
 
     <script>
+
+        var tableData, featuresOnMap, data1;
         function doOnButtonApply() {
+            tableData = [];
+            featuresOnMap = [];
+            data1 = [];
 
             var dict = getQueryParameters();
 
@@ -598,9 +613,22 @@
                     loadDataToMap(data);
                 }
             });
+            infoTable.clearAll();
 
+//
+//            data['rows'] = [
+//                    {id: 1, data: ["A Time to Kill", "John Grisham", "100"]},
+//                    {id: 2, data: ["Blood and Smoke", "Stephen King", "1000"]},
+//                    {id: 3, data: ["The Rainmaker", "John Grisham", "-200"]}
+//                ];
+//            data1[data1.length] = {id: data1.length, data: ["Василеостровский район", "John Grisham", "100"]};
+//            data1[data1.length] = {id: data1.length, data: ["The Rainmaker", "John Grisham", "-200"]};
+            console.log(tableData);
+            console.log(data1);
+//            infoTable.parse(data, "json");
+            infoTable.parse({rows:tableData}, "json");
+            infoTable.parse({rows:data1}, "json");
         }
-
 
         function doOnButtonDownload() {
             var dict = getQueryParameters();
@@ -629,16 +657,30 @@
             geoJSONLayer.addTo(map);
         }
 
+        var tableData;
         function onEachFeature(feature, layer) {
 
             var popupStr = ''.concat("<h2>", feature['properties']['ru_address'], "</h2><br>");
-            popupStr = ''.concat(popupStr, "Цена: ", "</b>", feature['properties']['price'], "тыс. руб.", "<br>");
+            popupStr = ''.concat(popupStr, "<b>", "Цена: ", "</b>", feature['properties']['price'], " тыс. руб.", "<br>");
             popupStr = ''.concat(popupStr, "<br>", "<b>", "Описание: ", "</b>", feature['properties']['description'], "<br>");
             popupStr = ''.concat(
                 popupStr, "<br>", "<b>", "Ссылка: ", "</b>",
                 '<a href="', feature['properties']['link'], '" target="_blank">Посмотреть на источнике<\a>', "<br>");
             layer.bindPopup(popupStr);
-            console.log(feature);
+            var list = [
+                feature['properties']['district'],
+                feature['properties']['ru_address'],
+                feature['properties']['description']
+            ];
+//
+//            tableData[tableData.length] = {
+//                id: tableData.length,
+//                data: list
+//            };
+//            data1[data1.length] = {id: data1.length, data: ["The Rainmaker", "John Grisham", "-200"]};
+//            tableData[tableData.length] = {id: tableData.length, data: ["Василеостровский район", "John Grisham", "100"]};
+            featuresOnMap[featuresOnMap.length] = layer;
+//            console.log(feature);
         }
     </script>
     <script>
