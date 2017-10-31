@@ -6,14 +6,12 @@ from datetime import datetime
 import json
 import os
 import shutil
-
-tstart = time.time()
-sys.path.append(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'RealEstateORM'))
-from ORMBase import session, Flat, District, Price_history, Address, Metro, Parks, Kad
+from RealEstateORM.ORMBase import Flat, District, Price_history, Address, Metro, Parks, Kad
 from geoalchemy2.shape import to_shape
-# from geoalchemy2.functions import ST_Transform
 from shapely.geometry import mapping, Polygon
 import shapefile
+
+tstart = time.time()
 
 
 DIRNAME = os.path.dirname(__file__)
@@ -123,6 +121,7 @@ class QueryOptions:
             if not self.dkad2:
                 self.dkad2 = 1000000
 
+
 class Listing:
     def __init__(self):
         self.id = None
@@ -227,28 +226,28 @@ def reorganize_result(qres):
     return res
 
 
-def build_query(qoptions):
+def build_query(session, qoptions):
     qoptions.prettify()
     query = session.query(Price_history, Flat, Address, District)
     if qoptions.date1:
         query = query.filter(Price_history.observe_date >= qoptions.date1,
                              Price_history.observe_date <= qoptions.date2)
-    if qoptions.price1:
+    if qoptions.price2:
         query = query.filter(Price_history.price >= qoptions.price1,
                              Price_history.price <= qoptions.price2)
-    if qoptions.price_sqm1:
+    if qoptions.price_sqm2:
         query = query.filter(Price_history._price_sqm >= qoptions.price_sqm1,
                              Price_history._price_sqm <= qoptions.price_sqm2)
 
     query = query.join(Flat, Flat.id == Price_history.flat_id)
 
-    if qoptions.qrooms1:
+    if qoptions.qrooms2:
         query = query.filter(Flat.qrooms >= qoptions.qrooms1,
                              Flat.qrooms <= qoptions.qrooms2)
-    if qoptions.floor1:
+    if qoptions.floor2:
         query = query.filter(Flat.floor >= qoptions.floor1,
                              Flat.floor <= qoptions.floor2)
-    if qoptions.area1:
+    if qoptions.area2:
         query = query.filter(Flat.area >= qoptions.area1,
                              Flat.area <= qoptions.area2)
     # if qoptions.living_area1:
@@ -280,7 +279,7 @@ def build_query(qoptions):
         query = query.filter(Address.geom.ST_CoveredBy(bound))
 
     # Querying by spatial parameters
-    if qoptions.dmetro1:
+    if qoptions.dmetro2:
         print '\nMetro\n'
         # query = query.filter(Address.geom.ST_Transform(32636).ST_DWithin(Metro.geom, qoptions.dmetro2))
         query = query.filter(Address.geom.ST_Transform(32636).ST_Distance(Metro.geom) >= qoptions.dmetro1,
@@ -289,7 +288,7 @@ def build_query(qoptions):
         print '\nPark\n'
         query = query.filter(Address.geom.ST_Transform(32636).ST_DWithin(Parks.geom, qoptions.dpark2))
 
-    if qoptions.dkad1:
+    if qoptions.dkad2:
         print '\nKAD\n'
         query = query.filter(Address.geom.ST_Transform(32636).ST_Distance(Kad.geom) >= qoptions.dkad1,
                              Address.geom.ST_Transform(32636).ST_Distance(Kad.geom) <= qoptions.dkad2)
@@ -299,9 +298,9 @@ def build_query(qoptions):
     return query
 
 
-def query_to_geojson(qoptions, maxcount=None):
+def query_to_geojson(session, qoptions, maxcount=None):
 
-    query = build_query(qoptions)
+    query = build_query(session, qoptions)
 
     res = []
 
@@ -327,14 +326,14 @@ def query_to_geojson(qoptions, maxcount=None):
     return query.count(), json.dumps(res_dict)
 
 
-def query_to_shp(qoptions, path, maxcount=None):
+def query_to_shp(session, qoptions, path, maxcount=None):
     path = os.path.abspath(path)
     name, ext = os.path.splitext(path)
     lowext = ext.lower()
     if lowext == '.shp':
         path = name
 
-    query = build_query(qoptions)
+    query = build_query(session, qoptions)
 
     writer = shapefile.Writer(shapefile.POINT)
     writer.autoBalance = 1
@@ -398,11 +397,13 @@ def query_to_shp(qoptions, path, maxcount=None):
         )
 
     writer.save(path + '.shp')
-    open(path + '.prj', 'w')\
-        .write('GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]')
+    open(path + '.prj', 'w').write(
+        'GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],'
+        'PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]'
+    )
 
 
-def save_query(qoptions, ftype='.shp'):
+def save_query(session, qoptions, ftype='.shp'):
     filename = 'RealEstate_%s' % datetime.now().strftime('%Y%m%d_%H%M')
     temp_folder_path = os.path.join(DIRNAME, 'uploads', filename)
     try:
@@ -410,13 +411,18 @@ def save_query(qoptions, ftype='.shp'):
     except OSError:
         pass
     if ftype.lower() == '.shp':
-        query_to_shp(qoptions,
-                     os.path.join(temp_folder_path, filename),
-                     maxcount=10000)
+        query_to_shp(
+            session,
+            qoptions,
+            os.path.join(temp_folder_path, filename),
+            maxcount=10000
+        )
     elif ftype.lower() == '.geojson':
         count, data = query_to_geojson(
+            session,
             qoptions,
-            maxcount=10000)
+            maxcount=10000
+        )
         open(os.path.join(temp_folder_path, filename+'.geojson'), 'w').write(data)
     shutil.make_archive(temp_folder_path, 'zip', temp_folder_path)
     shutil.rmtree(temp_folder_path)

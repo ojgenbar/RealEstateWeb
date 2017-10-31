@@ -1,0 +1,3 @@
+[submodule "RealEstateORM"]
+	path = RealEstateORM
+	url = git@github.com:ojgenbar/RealEstateORM.git

@@ -4,12 +4,19 @@ from app import app
 from flask import request, send_from_directory
 import json
 from queryFunc import QueryOptions, query_to_geojson, save_query
+from RealEstateORM.ORMBase import create_session
 import time
 import datetime
 from shapely.geometry import MultiPolygon, Polygon, shape
 
 DIRNAME = os.path.dirname(__file__)
 os.chdir(DIRNAME)
+session = create_session(
+    db='RealEstate',
+    user='oj_gen',
+    password=open(r'D:\OneDrive\Documents\PostgreSQL\passw.54l').read(),
+    echo=True
+)
 
 
 @app.errorhandler(404)
@@ -38,7 +45,7 @@ def qoptions_from_request(args):
     except ValueError:
         pass
     try:
-        qoptions.price2 = float(args['price2']) or None
+        qoptions.price2 = float(args['price2'])
     except ValueError:
         pass
     try:
@@ -122,7 +129,7 @@ def query():
     tstart = time.time()
     args = request.args
     qoptions = qoptions_from_request(args)
-    count, res = query_to_geojson(qoptions, maxcount=500)
+    count, res = query_to_geojson(session, qoptions, maxcount=500)
     print '_'*120
     print 'Count: %s' % count
     print 'Query time: %s sec.' % (time.time()-tstart)
@@ -145,6 +152,6 @@ def download():
     else:
         raise ValueError('Unknown export format')
 
-    filename = os.path.basename(save_query(qoptions, ftype=export_ext))
+    filename = os.path.basename(save_query(session, qoptions, ftype=export_ext))
     print '\n%s\n%s\n' % (uploads, filename)
     return send_from_directory(directory=uploads, filename=filename, as_attachment=True)
