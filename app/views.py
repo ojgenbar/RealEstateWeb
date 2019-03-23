@@ -3,20 +3,15 @@ import os.path
 from app import app
 from flask import request, send_from_directory
 import json
-from queryFunc import QueryOptions, query_to_geojson, save_query
-from RealEstateORM.ORMBase import create_session
+from query_functions import QueryOptions, query_to_geojson, save_query
+from RealEstateORM.connection import create_local_session
 import time
 import datetime
 from shapely.geometry import MultiPolygon, Polygon, shape
 
 DIRNAME = os.path.dirname(__file__)
 os.chdir(DIRNAME)
-session = create_session(
-    db='RealEstate',
-    user='oj_gen',
-    password=open(r'D:\OneDrive\Documents\PostgreSQL\passw.54l').read(),
-    echo=True
-)
+session = create_local_session(user='web_app')
 
 
 @app.errorhandler(404)
@@ -28,18 +23,20 @@ def not_found(error):
 @app.route('/index')
 @app.route('/index.html')
 def index():
-    return open(os.path.join(DIRNAME, 'index.html')).read()
+    with open(os.path.join(DIRNAME, 'index.html'), encoding='utf-8') as f:
+        page = f.read()
+    return page
 
 
 def qoptions_from_request(args):
     qoptions = QueryOptions()
 
-    print args['bound']
+    print(args['bound'])
     polygons = [Polygon(shape(i['geometry'])) for i in json.loads(args['bound'])['features'] if i['geometry']["type"] == "Polygon"]
     qoptions.boundary = MultiPolygon(polygons)
 
-    qoptions.date1 = datetime.date(*(int(i) for i in args['date1'].split('-')))
-    qoptions.date2 = datetime.date(*(int(i) for i in args['date2'].split('-')))
+    qoptions.date1 = datetime.date(*[int(i) for i in args['date1'].split('-')])
+    qoptions.date2 = datetime.date(*[int(i) for i in args['date2'].split('-')])
     try:
         qoptions.price1 = float(args['price1'])
     except ValueError:
@@ -120,7 +117,7 @@ def qoptions_from_request(args):
     # qoptions.districts = args['districts'] or None
 
     qoptions.prettify()
-    print qoptions
+    print(qoptions)
     return qoptions
 
 
@@ -130,10 +127,10 @@ def query():
     args = request.args
     qoptions = qoptions_from_request(args)
     count, res = query_to_geojson(session, qoptions, maxcount=500)
-    print '_'*120
-    print 'Count: %s' % count
-    print 'Query time: %s sec.' % (time.time()-tstart)
-    # print sorted([i for i in dir(qoptions) if not i.startswith('_')])
+    print('_'*120)
+    print('Count: %s' % count)
+    print('Query time: %s sec.' % (time.time()-tstart))
+    # print(sorted([i for i in dir(qoptions) if not i.startswith('_')]))
 
     return res
 
@@ -153,5 +150,5 @@ def download():
         raise ValueError('Unknown export format')
 
     filename = os.path.basename(save_query(session, qoptions, ftype=export_ext))
-    print '\n%s\n%s\n' % (uploads, filename)
+    print('\n%s\n%s\n' % (uploads, filename))
     return send_from_directory(directory=uploads, filename=filename, as_attachment=True)

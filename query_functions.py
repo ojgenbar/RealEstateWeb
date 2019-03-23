@@ -6,7 +6,8 @@ from datetime import datetime
 import json
 import os
 import shutil
-from RealEstateORM.ORMBase import Flat, District, Price_history, Address, Metro, Parks, Kad
+from RealEstateORM.orm_main import *
+from RealEstateORM.orm_spatial_data import *
 from geoalchemy2.shape import to_shape
 from shapely.geometry import mapping, Polygon
 import shapefile
@@ -228,18 +229,18 @@ def reorganize_result(qres):
 
 def build_query(session, qoptions):
     qoptions.prettify()
-    query = session.query(Price_history, Flat, Address, District)
+    query = session.query(PriceHistory, Flat, Address, District)
     if qoptions.date1:
-        query = query.filter(Price_history.observe_date >= qoptions.date1,
-                             Price_history.observe_date <= qoptions.date2)
+        query = query.filter(PriceHistory.observe_date >= qoptions.date1,
+                             PriceHistory.observe_date <= qoptions.date2)
     if qoptions.price2:
-        query = query.filter(Price_history.price >= qoptions.price1,
-                             Price_history.price <= qoptions.price2)
+        query = query.filter(PriceHistory.price >= qoptions.price1,
+                             PriceHistory.price <= qoptions.price2)
     if qoptions.price_sqm2:
-        query = query.filter(Price_history._price_sqm >= qoptions.price_sqm1,
-                             Price_history._price_sqm <= qoptions.price_sqm2)
+        query = query.filter(PriceHistory._price_sqm >= qoptions.price_sqm1,
+                             PriceHistory._price_sqm <= qoptions.price_sqm2)
 
-    query = query.join(Flat, Flat.id == Price_history.flat_id)
+    query = query.join(Flat, Flat.id == PriceHistory.flat_id)
 
     if qoptions.qrooms2:
         query = query.filter(Flat.qrooms >= qoptions.qrooms1,
@@ -275,21 +276,21 @@ def build_query(session, qoptions):
     if qoptions.boundary:
         bound_wkt = qoptions.boundary.wkt
         bound = 'SRID=4326; %s' % bound_wkt
-        # print bound
+        # print(bound)
         query = query.filter(Address.geom.ST_CoveredBy(bound))
 
     # Querying by spatial parameters
     if qoptions.dmetro2:
-        print '\nMetro\n'
+        print('\nMetro\n')
         # query = query.filter(Address.geom.ST_Transform(32636).ST_DWithin(Metro.geom, qoptions.dmetro2))
         query = query.filter(Address.geom.ST_Transform(32636).ST_Distance(Metro.geom) >= qoptions.dmetro1,
                              Address.geom.ST_Transform(32636).ST_Distance(Metro.geom) <= qoptions.dmetro2)
     if qoptions.dpark2:
-        print '\nPark\n'
-        query = query.filter(Address.geom.ST_Transform(32636).ST_DWithin(Parks.geom, qoptions.dpark2))
+        print('\nPark\n')
+        query = query.filter(Address.geom.ST_Transform(32636).ST_DWithin(Park.geom, qoptions.dpark2))
 
     if qoptions.dkad2:
-        print '\nKAD\n'
+        print('\nKAD\n')
         query = query.filter(Address.geom.ST_Transform(32636).ST_Distance(Kad.geom) >= qoptions.dkad1,
                              Address.geom.ST_Transform(32636).ST_Distance(Kad.geom) <= qoptions.dkad2)
 
@@ -435,7 +436,7 @@ if __name__ == '__main__':
     ####################
     reader = shapefile.Reader(r'wf/in/bound.shp')
     pol = Polygon(reader.shape(0).points)
-    print pol.wkt
+    print(pol.wkt)
 
     qo = QueryOptions()
     qo.date1 = date(2017, 2, 3)
@@ -454,10 +455,10 @@ if __name__ == '__main__':
     # qo.bathrooms = [u'Р', u'С']
     # qo.districts = [u'Область', u'Калининский район']
     qo.boundary = pol
-    # print re_query(qo)[1]
-    # print re_query(qo)[0]
-    print os.path.join(os.path.dirname(os.path.dirname(__file__)), 'RealEstateORM')
+    # print(re_query(qo)[1])
+    # print(re_query(qo)[0])
+    print(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'RealEstateORM'))
 
     ####################
-    print '_' * 50
-    print 'Time of working: %s sec.' % str(time.time() - tstart).zfill(10)
+    print('_' * 50)
+    print('Time of working: %s sec.' % str(time.time() - tstart).zfill(10))
