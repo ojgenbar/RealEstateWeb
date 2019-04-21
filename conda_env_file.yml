@@ -1,0 +1,42 @@
+name: py35_web
+channels:
+  - defaults
+dependencies:
+  - blas=1.0=mkl
+  - ca-certificates=2019.1.23=0
+  - certifi=2018.8.24=py35_1
+  - click=6.7=py35h10df73f_0
+  - flask=1.0.2=py35_1
+  - geos=3.6.2=h9ef7328_2
+  - icc_rt=2019.0.0=h0cc432a_1
+  - intel-openmp=2019.3=203
+  - itsdangerous=0.24=py35_1
+  - jinja2=2.10=py35_0
+  - krb5=1.16.1=hc04afaa_7
+  - libpq=11.2=h3235a2c_0
+  - markupsafe=1.0=py35hfa6e2cd_1
+  - mkl=2018.0.3=1
+  - mkl_fft=1.0.6=py35hdbbee80_0
+  - mkl_random=1.0.1=py35h77b88f5_1
+  - numpy=1.15.2=py35ha559c80_0
+  - numpy-base=1.15.2=py35h8128ebf_0
+  - openssl=1.1.1b=he774522_1
+  - psycopg2=2.6.2=py35_0
+  - python=3.5.6=he025d50_0
+  - setuptools=40.2.0=py35_0
+  - shapely=1.6.4=py35hc90234e_0
+  - sqlalchemy=1.2.11=py35hfa6e2cd_0
+  - sqlite=3.27.2=he774522_0
+  - tk=8.6.8=hfa6e2cd_0
+  - vc=14.1=h0510ff6_4
+  - vs2015_runtime=14.15.26706=h3a45250_0
+  - werkzeug=0.14.1=py35_0
+  - wheel=0.31.1=py35_0
+  - wincertstore=0.2=py35hfebbdb8_0
+  - zlib=1.2.11=h62dcd97_3
+  - pip
+  - pip:
+    - flask-cors==3.0.7
+    - geoalchemy2==0.6.1
+    - pyshp==2.1.0
+    - six==1.12.0
