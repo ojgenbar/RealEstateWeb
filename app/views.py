@@ -10,6 +10,9 @@ import datetime
 from shapely.geometry import MultiPolygon, Polygon, shape
 
 DIRNAME = os.path.dirname(__file__)
+DATE_FORMAT = '%Y-%m-%d'
+MAX_COUNT = 500
+
 os.chdir(DIRNAME)
 session = create_local_session(user='web_app')
 
@@ -28,96 +31,58 @@ def index():
     return page
 
 
+def _multipolygon_from_geojson(data):
+    features = json.loads(data)['features']
+    polygons = [Polygon(shape(feature['geometry'])) for feature in features if feature['geometry']["type"] == "Polygon"]
+    boundary = MultiPolygon(polygons)
+    return boundary
+
+
+def _date_from_string(s):
+    return datetime.datetime.strptime(s, DATE_FORMAT).date()
+
+
+def _price_from_string(s):
+    return float(s)*1000
+
+
+ARGUMENTS_FUNCS = {
+    'boundary': _multipolygon_from_geojson,
+    'date1': _date_from_string,
+    'date2': _date_from_string,
+    'price1': _price_from_string,
+    'price2': _price_from_string,
+    'area1': float,
+    'area2': float,
+    'kitchen_area1': float,
+    'kitchen_area2': float,
+    'living_area1': float,
+    'living_area2': float,
+    'price_sqm1': _price_from_string,
+    'price_sqm2': _price_from_string,
+    'qrooms1': int,
+    'qrooms2': int,
+    'dmetro1': int,
+    'dmetro2': int,
+    'dkad1': int,
+    'dkad2': int,
+    'dpark2': int,
+    'dschooll': int,
+    'dschool2': int,
+    'dkindergarten1': int,
+    'dkindergarten2': int,
+    'exportFormat': str,
+}
+
+
 def qoptions_from_request(args):
     qoptions = QueryOptions()
 
-    print(args['bound'])
-    polygons = [Polygon(shape(i['geometry'])) for i in json.loads(args['bound'])['features'] if i['geometry']["type"] == "Polygon"]
-    qoptions.boundary = MultiPolygon(polygons)
+    for key, value in args.items():
+        func = ARGUMENTS_FUNCS[key]
+        value = func(value) if value != '' else None
+        setattr(qoptions, key, value)
 
-    qoptions.date1 = datetime.date(*[int(i) for i in args['date1'].split('-')])
-    qoptions.date2 = datetime.date(*[int(i) for i in args['date2'].split('-')])
-    try:
-        qoptions.price1 = float(args['price1'])
-    except ValueError:
-        pass
-    try:
-        qoptions.price2 = float(args['price2'])
-    except ValueError:
-        pass
-    try:
-        qoptions.area1 = float(args['area1'])
-    except ValueError:
-        pass
-    try:
-        qoptions.area2 = float(args['area2'])
-    except ValueError:
-        pass
-    try:
-        qoptions.price_sqm1 = float(args['price_sqm1'])
-    except ValueError:
-        pass
-    try:
-        qoptions.price_sqm2 = float(args['price_sqm2'])
-    except ValueError:
-        pass
-    try:
-        qoptions.qrooms1 = int(args['qrooms1'])
-    except ValueError:
-        pass
-    try:
-        qoptions.qrooms2 = int(args['qrooms2'])
-    except ValueError:
-        pass
-    try:
-        qoptions.dmetro1 = int(args['dmetro1'])
-    except ValueError:
-        pass
-    try:
-        qoptions.dmetro2 = int(args['dmetro2'])
-    except ValueError:
-        pass
-    try:
-        qoptions.dmetro1 = int(args['dmetro1'])
-    except ValueError:
-        pass
-    try:
-        qoptions.dmetro2 = int(args['dmetro2'])
-    except ValueError:
-        pass
-    try:
-        qoptions.dkad1 = int(args['dkad1'])
-    except ValueError:
-        pass
-    try:
-        qoptions.dkad2 = int(args['dkad2'])
-    except ValueError:
-        pass
-    # try:
-    #     qoptions.dpark1 = int(args['dpark1'])
-    # except ValueError:
-    #     pass
-    try:
-        qoptions.dpark2 = int(args['dpark2'])
-    except ValueError:
-        pass
-
-    # qoptions.floor1 = float(args['floor1']) or None
-    # qoptions.floor2 = float(args['floor2']) or None
-    # qoptions.floors1 = float(args['floors1']) or None
-    # qoptions.floors2 = float(args['floors2']) or None
-    # qoptions.kitchen_area1 = args['kitchen_area1'] or None
-    # qoptions.kitchen_area2 = args['kitchen_area2'] or None
-    # qoptions.living_area1 = args['living_area1'] or None
-    # qoptions.living_area2 = args['living_area2'] or None
-    # qoptions.building_types = args['building_types'] or None
-    # qoptions.bathrooms = args['bathrooms'] or None
-    # qoptions.abilities = args['abilities'] or None
-    # qoptions.agency = args['agency'] or None
-    # qoptions.districts = args['districts'] or None
-
-    qoptions.prettify()
-    print(qoptions)
     return qoptions
 
 
@@ -126,7 +91,9 @@ def query():
     tstart = time.time()
     args = request.args
     qoptions = qoptions_from_request(args)
-    count, res = query_to_geojson(session, qoptions, maxcount=500)
+    qoptions.limit = MAX_COUNT
+    count, res = query_to_geojson(session, qoptions)
+
     print('_'*120)
     print('Count: %s' % count)
     print('Query time: %s sec.' % (time.time()-tstart))

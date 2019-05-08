@@ -147,7 +147,7 @@
             drawnItems = L.featureGroup().addTo(map);
             L.control.layers({
                     'OSM': osm,
-                    'Mapbasic': mapbox.addTo(map),
+                    'Mapbox': mapbox.addTo(map),
                     "Google": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
                         attribution: 'google'
                     })
@@ -249,35 +249,7 @@
                             labelWidth: "20",
                             inputWidth: "50",
                             validate: "isValidNumeric",
-                            value: "3501"
-                        }
-                    ]
-                    },
-                    {
-                        type: "block", width: "auto", blockOffset: "0", list: [
-                        {type: "label", label: "Цена за кв. м., тыс. руб.", value: "", labelWidth: "160"},
-                        {type: "newcolumn", offset: "15"},
-                        {
-                            type: "input",
-                            name: "pricesqm1",
-                            label: "от",
-                            labelWidth: "20",
-                            inputWidth: "50",
-                            labelAlign: "right",
-                            validate: "isValidNumeric",
-                            value: "50"
-                        },
-                        {type: "newcolumn"},
-                        {
-                            type: "input",
-                            name: "pricesqm2",
-                            label: "до",
-                            offsetLeft: "30",
-                            labelAlign: "right",
-                            labelWidth: "20",
-                            inputWidth: "50",
-                            validate: "isValidNumeric",
-                            value: "150"
+                            value: "3500"
                         }
                     ]
                     },
@@ -453,6 +425,62 @@
                                 value: ""
                             }
                         ]
+                        },
+                        {
+                            type: "block", width: "auto", blockOffset: "0", list: [
+                            {type: "label", label: "До школ", value: "", labelWidth: "135"},
+                            {type: "newcolumn", offset: "15"},
+                            {
+                                type: "input",
+                                name: "school1",
+                                label: "от",
+                                labelWidth: "20",
+                                inputWidth: "50",
+                                labelAlign: "right",
+                                validate: "isValidNumeric",
+                                value: ""
+                            },
+                            {type: "newcolumn"},
+                            {
+                                type: "input",
+                                name: "school2",
+                                label: "до",
+                                offsetLeft: "30",
+                                labelAlign: "right",
+                                labelWidth: "20",
+                                inputWidth: "50",
+                                validate: "isValidNumeric",
+                                value: ""
+                            }
+                        ]
+                        },
+                        {
+                            type: "block", width: "auto", blockOffset: "0", list: [
+                            {type: "label", label: "До детских садов", value: "", labelWidth: "135"},
+                            {type: "newcolumn", offset: "15"},
+                            {
+                                type: "input",
+                                name: "kindergarten1",
+                                label: "от",
+                                labelWidth: "20",
+                                inputWidth: "50",
+                                labelAlign: "right",
+                                validate: "isValidNumeric",
+                                value: ""
+                            },
+                            {type: "newcolumn"},
+                            {
+                                type: "input",
+                                name: "kindergarten2",
+                                label: "до",
+                                offsetLeft: "30",
+                                labelAlign: "right",
+                                labelWidth: "20",
+                                inputWidth: "50",
+                                validate: "isValidNumeric",
+                                value: ""
+                            }
+                        ]
                         }
                     ]
                     },
@@ -541,8 +569,10 @@
             qrooms2 = parametersForm.getItemValue("qrooms2");
             price1 = parametersForm.getItemValue("price1");
             price2 = parametersForm.getItemValue("price2");
-            pricesqm1 = parametersForm.getItemValue("pricesqm1");
-            pricesqm2 = parametersForm.getItemValue("pricesqm2");
+            // pricesqm1 = parametersForm.getItemValue("pricesqm1");
+            // pricesqm2 = parametersForm.getItemValue("pricesqm2");
+            pricesqm1 = null;
+            pricesqm2 = null;
             area1 = parametersForm.getItemValue("area1");
             area2 = parametersForm.getItemValue("area2");
             livingarea1 = parametersForm.getItemValue("livingarea1");
@@ -557,6 +587,10 @@
             var dpark2 = parametersForm.getItemValue("park2");
             var dkad1 = parametersForm.getItemValue("kad1");
             var dkad2 = parametersForm.getItemValue("kad2");
+            var dschool1 = parametersForm.getItemValue("school1");
+            var dschool2 = parametersForm.getItemValue("school2");
+            var dkindergarten1 = parametersForm.getItemValue("kindergarten1");
+            var dkindergarten2 = parametersForm.getItemValue("kindergarten2");
 
             exportFormat = downloadForm.getItemValue("format");
 
@@ -578,14 +612,17 @@
                 kitchen_area2: kitchenarea2,
                 date1: date1,
                 date2: date2,
-                bound: dataJSON,
+                boundary: dataJSON,
                 exportFormat: exportFormat,
                 dmetro1: dmetro1,
                 dmetro2: dmetro2,
-//                dpark1: dpark1,
                 dpark2: dpark2,
                 dkad1: dkad1,
-                dkad2: dkad2
+                dkad2: dkad2,
+                dschooll: dschool1,
+                dschool2: dschool2,
+                dkindergarten1: dkindergarten1,
+                dkindergarten2: dkindergarten2,
             };
             return parametersDict
         }
