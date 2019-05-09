@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import os.path
+import traceback
+
 from app import app
 from flask import request, send_from_directory
 import json
@@ -9,9 +11,11 @@ import time
 import datetime
 from shapely.geometry import MultiPolygon, Polygon, shape
 from shapely.ops import cascaded_union
+import shutil
 
 
 DIRNAME = os.path.dirname(__file__)
+UPLOADS_DIR = os.path.join(os.path.dirname(DIRNAME), 'uploads')
 DATE_FORMAT = '%Y-%m-%d'
 MAX_COUNT = 500
 
@@ -112,7 +116,6 @@ def download():
     qoptions = qoptions_from_request(args)
     qoptions.limit = MAX_COUNT
 
-    uploads = os.path.join(os.path.dirname(DIRNAME), 'uploads')
     export_format = args['exportFormat']
     if export_format == 'ESRI Shapefile':
         export_ext = '.shp'
@@ -122,5 +125,27 @@ def download():
         raise ValueError('Unknown export format')
 
     filename = os.path.basename(save_query(session, qoptions, ftype=export_ext))
-    print('\n%s\n%s\n' % (uploads, filename))
-    return send_from_directory(directory=uploads, filename=filename, as_attachment=True)
+    print('\n%s\n%s\n' % (UPLOADS_DIR, filename))
+    try:
+        clean_uploads_dir()
+    except OSError:
+        traceback.print_exc()
+    return send_from_directory(directory=UPLOADS_DIR, filename=filename, as_attachment=True)
+
+
+def clean_uploads_dir():
+    now = time.time()
+
+    for f in os.listdir(UPLOADS_DIR):
+        if not f.startswith('RealEstate_'):
+            continue
+
+        path = os.path.join(UPLOADS_DIR, f)
+        if now - os.path.getmtime(path) < 60:
+            continue
+
+        print('rm {}'.format(f))
+        if os.path.isdir(path):
+            shutil.rmtree(path)
+        else:
+            os.remove(path)
