@@ -92,6 +92,8 @@ def query():
     args = request.args
     qoptions = qoptions_from_request(args)
     qoptions.limit = MAX_COUNT
+    qoptions.distinct_on_address = True
+
     count, res = query_to_geojson(session, qoptions)
 
     print('_'*120)
@@ -106,6 +108,7 @@ def query():
 def download():
     args = request.args
     qoptions = qoptions_from_request(args)
+    qoptions.limit = MAX_COUNT
 
     uploads = os.path.join(os.path.dirname(DIRNAME), 'uploads')
     export_format = args['exportFormat']

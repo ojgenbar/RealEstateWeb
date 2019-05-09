@@ -43,6 +43,7 @@ class QueryOptions:
         self.dkindergarten2 = None
 
         self.limit = None
+        self.distinct_on_address = None
 
 
 class QueryBuilder:
@@ -59,11 +60,14 @@ class QueryBuilder:
             self.query = self.query.filter(attribute >= gte)
 
     def boundary_filter(self):
-
-        if self.qoptions.boundary is not None:
+        if not(self.qoptions.boundary is None or self.qoptions.boundary.is_empty):
             bound_wkt = self.qoptions.boundary.wkt
             bound = 'SRID=4326; {}'.format(bound_wkt)
             self.query = self.query.filter(AddressView.geom.ST_Within(bound))
+
+    def set_distinct_on_address(self):
+        if self.qoptions.distinct_on_address:
+            self.query = self.query.distinct(AddressView.address_id)
 
     def build(self):
         opts = self.qoptions
@@ -87,6 +91,8 @@ class QueryBuilder:
         self.range_filter(AddressView.kindergarten, opts.dkindergarten1, opts.dkindergarten2)
 
         self.boundary_filter()
+
+        self.set_distinct_on_address()
 
         self.query = self.query.limit(opts.limit)
 
