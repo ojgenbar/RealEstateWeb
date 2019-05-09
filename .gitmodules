@@ -1,4 +1,4 @@
 [submodule "RealEstateORM"]
 	path = RealEstateORM
-	url = git@github.com:ojgenbar/RealEstateORM.git
+	url = https://github.com/ojgenbar/RealEstateORM.git
 	branch = cian_version
