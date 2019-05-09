@@ -8,6 +8,8 @@ from RealEstateORM.connection import create_local_session
 import time
 import datetime
 from shapely.geometry import MultiPolygon, Polygon, shape
+from shapely.ops import cascaded_union
+
 
 DIRNAME = os.path.dirname(__file__)
 DATE_FORMAT = '%Y-%m-%d'
@@ -34,7 +36,7 @@ def index():
 def _multipolygon_from_geojson(data):
     features = json.loads(data)['features']
     polygons = [Polygon(shape(feature['geometry'])) for feature in features if feature['geometry']["type"] == "Polygon"]
-    boundary = MultiPolygon(polygons)
+    boundary = cascaded_union(polygons)
     return boundary
 
 

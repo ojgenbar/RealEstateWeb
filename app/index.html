@@ -98,7 +98,6 @@
             var windowWidth, windowHeight, aw, ah;
             mainLayout = new dhtmlXLayoutObject({
                 parent: 'mainlayout',
-//                parent: document.body,
                 pattern: "3U",
                 cells: [{id: "a", text: "Карта"},
                     {id: "b", text: "Меню", width: 425},
@@ -109,31 +108,34 @@
             windowHeight = $(document).find('#mainlayout').height();
             aw = windowWidth * 0.5;
             ah = windowHeight * 0.8;
-//            mainLayout.cells('a').setWidth(aw);
             mainLayout.cells('a').setHeight(ah);
 
             mainLayout.cells('a').attachObject('mapid');
-//            mainLayout.cells('b').attachObject('accObj');
 
             mainLayout.cells('b').fixSize(true, false);
             mainLayout.cells('b').collapse();
             mainLayout.cells('c').collapse();
 
             map = L.map('mapid').setView([59.942959, 30.35], 10);
-//            map = L.map('mapid').setView([40.712216, -74.22655], 10);
-//            L.Icon.Default.imagePath = 'static/img';
-//            alert(L.Icon.Default.prototype.options[iconUrl]);
             L.Icon.Default.prototype.options = {
                 iconUrl: '/static/img/SupplyIcon.png',
                 iconSize: [10, 10],
                 iconAnchor: [5, 5]
             };
 
-            var imageUrl = 'static/raster/AVERAGE-3857-colored-2.png',
-                imageBounds = [[59.6339240289707959, 29.4295413701381676], [60.2449766597451273, 30.7587528125922631]];
-            var im = L.imageOverlay(imageUrl, imageBounds, {opacity: 0.65}).addTo(map);
+            var imageUrl = 'static/raster/avg_price3857-colored.png',
+                imageBounds = [[59.6225372152,29.3405545895],[60.3847730217,30.7683975132]];
+            var avg_price_im = L.imageOverlay(imageUrl, imageBounds, {opacity: 0.65}).addTo(map);
 
-            var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            imageUrl = 'static/raster/poi_density3857-colored.png',
+                imageBounds = [[59.6455827094,29.3838929435], [60.252856283,30.6864501055]];
+            let poi_dens_im = L.imageOverlay(imageUrl, imageBounds, {opacity: 0.65});
+
+            imageUrl = 'static/raster/ppl_density3857-colored.png',
+                imageBounds = [[59.6339221371,29.5065775516],[60.2594764525,30.704677229]];
+            let ppl_dens_im = L.imageOverlay(imageUrl, imageBounds, {opacity: 0.65});
+
+            let osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 osmAttrib = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors' +
                     '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ',
                 osm = L.tileLayer(osmUrl, {maxZoom: 18, attribution: osmAttrib}),
@@ -144,19 +146,26 @@
                     'Imagery © <a href="http://mapbox.com">Mapbox</a>',
                     id: 'mapbox.streets'
                 });
+
+            let google = L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
+                attribution: 'google'
+            });
+
             drawnItems = L.featureGroup().addTo(map);
+
             L.control.layers({
                     'OSM': osm,
                     'Mapbox': mapbox.addTo(map),
-                    "Google": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
-                        attribution: 'google'
-                    })
+                    "Google": google
                 },
                 {
                     'Области': drawnItems,
-                    'Цена': im
+                    'Цена': avg_price_im,
+                    'Плотность населения': ppl_dens_im,
+                    'Туристическая инфраструктура': poi_dens_im
                 },
-                {position: 'topleft', collapsed: false}).addTo(map);
+                {position: 'topleft', collapsed: true}).addTo(map);
+
             map.addControl(new L.Control.Draw({
                 edit: {
                     featureGroup: drawnItems,
@@ -175,15 +184,12 @@
                 }
             }));
 
-//            map.addControl(new L.EditToolbar.Edit());
-
             map.on(L.Draw.Event.CREATED, function (event) {
                 var layer = event.layer;
                 drawnItems.addLayer(layer);
             });
 
             myAcc = mainLayout.cells('b').attachAccordion();
-//            myAcc.addItem("a1", "Навигация по сайту");
             myAcc.addItem("a2", "Параметры поиска", true);
             myAcc.addItem("a3", "Экспорт выбранных объявлений");
 
@@ -533,16 +539,28 @@
             downloadForm.loadStruct(formData);
 
             infoTable = mainLayout.cells('c').attachGrid();
-//            mainLayout.cells('c').expand();
             infoTable.setImagePath("static/js/dhtmlxSuite_v51_std/codebase/imgs/");
-//            infoTable.load("static/table_init.xml");
-//            infoTable.clearAndLoad("static/table_init.xml");
             infoTable.enableCellIds(true);
-//            infoTable.setColumnIds("district,address,rooms,floor,floors,building_type,area,living_area,kitchen_area,bathroom,price,price_sqm,abilities,agency,tel,description,link");
-            infoTable.setHeader("Sales,Book Title,Author");
-			infoTable.setInitWidths("80,150,100");
-			infoTable.setColAlign("right,left,left");
-			infoTable.setColTypes("ed,ed,ed");
+
+            var header = [
+                'Комнат',
+                'Цена',
+                'Площадь',
+                'Жилая',
+                'Кухни',
+                'Этаж',
+                'Раздельных С/У',
+                'Смежных С/У',
+                'Материал',
+                'Год постройки',
+                'Адрес',
+                'Ссылка',
+            ];
+            infoTable.setDelimiter(';');
+            infoTable.setHeader(header.join(';'));
+			infoTable.setInitWidths([60,60,60,60,60,60,100,100,60,100,400,300].join(';'));
+			infoTable.setColAlign(('center;'.repeat(12)).slice(0, -1));
+
 			infoTable.init();
 
 
@@ -632,6 +650,8 @@
     <script>
 
         var tableData, featuresOnMap, data1;
+        const baseurl = 'http://127.0.0.1:1624/query?';
+
         function doOnButtonApply() {
             tableData = [];
             featuresOnMap = [];
@@ -639,7 +659,6 @@
 
             var dict = getQueryParameters();
 
-            var baseurl = 'http://127.0.0.1:1624/query?';
             var strparams = jQuery.param(dict);
             var request = baseurl + strparams;
             console.log(request);
@@ -647,30 +666,13 @@
             $.ajax({
                 url: request,
                 success: function (data) {
-                    loadDataToMap(data);
+                    loadDataToAll(data);
                 }
             });
-            infoTable.clearAll();
-
-//
-//            data['rows'] = [
-//                    {id: 1, data: ["A Time to Kill", "John Grisham", "100"]},
-//                    {id: 2, data: ["Blood and Smoke", "Stephen King", "1000"]},
-//                    {id: 3, data: ["The Rainmaker", "John Grisham", "-200"]}
-//                ];
-//            data1[data1.length] = {id: data1.length, data: ["Василеостровский район", "John Grisham", "100"]};
-//            data1[data1.length] = {id: data1.length, data: ["The Rainmaker", "John Grisham", "-200"]};
-            console.log(tableData);
-            console.log(data1);
-//            infoTable.parse(data, "json");
-            infoTable.parse({rows:tableData}, "json");
-            infoTable.parse({rows:data1}, "json");
         }
 
         function doOnButtonDownload() {
             var dict = getQueryParameters();
-
-            var baseurl = 'http://127.0.0.1:5000/download?';
             var strparams = jQuery.param(dict);
             var request = baseurl + strparams;
             console.log(request);
@@ -681,10 +683,37 @@
         }
     </script>
     <script>
-        var geoJSONLayer;
-        function loadDataToMap(data) {
+        function loadDataToAll(data) {
             var decomp_data = JSON.parse(data);
-//            alert(data);
+            loadDataToMap(decomp_data);
+            loadDataToTable(decomp_data)
+        }
+
+        function loadDataToTable(decomp_data) {
+            infoTable.clearAll();
+            var features = decomp_data['features'];
+            for (const feature of features) {
+                var propeties = feature['properties'];
+                var values = [
+                    propeties['qrooms'],
+                    propeties['price'],
+                    propeties['area'],
+                    propeties['living_area'],
+                    propeties['kitchen_area'],
+                    propeties['floor'].toString() + '/' + propeties['floors'].toString(),
+                    propeties['separate_wc_count'],
+                    propeties['combined_wc_count'],
+                    propeties['material_type'],
+                    propeties['year'],
+                    propeties['ru_address'],
+                    propeties['link'],
+                ];
+                infoTable.addRow(Number.parseInt(propeties['flat_id']), values.join(';'));
+            }
+        }
+
+        var geoJSONLayer;
+        function loadDataToMap(decomp_data) {
             if (geoJSONLayer) {
                 map.removeLayer(geoJSONLayer)
             }
