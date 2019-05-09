@@ -650,7 +650,7 @@
     <script>
 
         var tableData, featuresOnMap, data1;
-        const baseurl = 'http://127.0.0.1:1624/query?';
+        const query_url = '/query?';
 
         function doOnButtonApply() {
             tableData = [];
@@ -660,7 +660,7 @@
             var dict = getQueryParameters();
 
             var strparams = jQuery.param(dict);
-            var request = baseurl + strparams;
+            var request = query_url + strparams;
             console.log(request);
 
             $.ajax({
@@ -671,15 +671,14 @@
             });
         }
 
+        const download_url = '/download?';
         function doOnButtonDownload() {
             var dict = getQueryParameters();
             var strparams = jQuery.param(dict);
-            var request = baseurl + strparams;
+            var request = download_url + strparams;
             console.log(request);
 
             window.location.replace(request);
-
-
         }
     </script>
     <script>
