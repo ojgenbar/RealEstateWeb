@@ -88,30 +88,27 @@
             /*margin-top: 10px;*/
             /*margin-left: 10px;*/
             width: 100%;
-            height: 90%;
+            height: 100%;
         }
     </style>
 
     <script>
         var mainLayout, map, myAcc, formData, parametersForm, downloadForm, infoTable;
         function doOnLoad() {
-            var windowWidth, windowHeight, aw, ah;
+
             mainLayout = new dhtmlXLayoutObject({
                 parent: 'mainlayout',
                 pattern: "3U",
-                cells: [{id: "a", text: "Карта"},
-                    {id: "b", text: "Меню", width: 425},
+                cells: [{id: "a", text: "Продажа недвижимости в Петербурге"},
+                    {id: "b", text: "Меню"},
                     {id: "c", text: "Информация"}
                 ]
             });
-            windowWidth = $(document).find('#mainlayout').width();
-            windowHeight = $(document).find('#mainlayout').height();
-            aw = windowWidth * 0.5;
-            ah = windowHeight * 0.8;
-            mainLayout.cells('a').setHeight(ah);
+
+            doOnResize();
+            window.addEventListener('resize', debounce(doOnResize, 200, false), false);
 
             mainLayout.cells('a').attachObject('mapid');
-
             mainLayout.cells('b').fixSize(true, false);
             mainLayout.cells('b').collapse();
             mainLayout.cells('c').collapse();
@@ -571,6 +568,33 @@
 
             doOnButtonApply();
         }
+
+        const debounce = (func, wait, immediate) => {
+            var timeout;
+            return () => {
+                const context = this, args = arguments;
+                const later = function() {
+                    timeout = null;
+                    if (!immediate) func.apply(context, args);
+                };
+                const callNow = immediate && !timeout;
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+                if (callNow) func.apply(context, args);
+            };
+        };
+
+        function doOnResize() {
+            let windowWidth = $(document).find('#mainlayout').width();
+            let windowHeight = $(document).find('#mainlayout').height();
+
+            let aheight = windowHeight * 0.8;
+            let bwidth = Math.min(0.5*windowWidth, 425);
+
+            mainLayout.cells('a').setHeight(aheight);
+            mainLayout.cells('b').setWidth(bwidth);
+            mainLayout.setSizes();
+        }
     </script>
 
     <script>
@@ -768,14 +792,12 @@
     </script>
 </head>
 <body onload="doOnLoad();">
+<body onresize="doOnResize();">
 <!--[if lt IE 8]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<div id="header" style="width: 100%; height: 5%; background-color: #3399cc">
-    <h1>Недвижимость Санкт-Петербурга</h1>
-</div>
 <div id="mainlayout">
     <div id="mapid" style="width: 100%; height: 100%;"></div>
 </div>
