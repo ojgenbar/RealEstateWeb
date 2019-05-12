@@ -750,7 +750,7 @@
         function onEachFeature(feature, layer) {
 
             var popupStr = ''.concat("<h2>", feature['properties']['ru_address'], "</h2><br>");
-            popupStr = ''.concat(popupStr, "<b>", "Цена: ", "</b>", feature['properties']['price'], " тыс. руб.", "<br>");
+            popupStr = ''.concat(popupStr, "<b>", "Цена: ", "</b>", feature['properties']['price'], " руб.", "<br>");
             popupStr = ''.concat(popupStr, "<br>", "<b>", "Описание: ", "</b>", feature['properties']['description'], "<br>");
             popupStr = ''.concat(
                 popupStr, "<br>", "<b>", "Ссылка: ", "</b>",
